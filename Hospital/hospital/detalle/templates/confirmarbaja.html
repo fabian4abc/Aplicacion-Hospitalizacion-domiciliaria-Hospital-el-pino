@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<form  method="POST">
+	{% csrf_token%}
+	<h1>Dar de Baja a Paciente</h1><br>
+	<hr style="background-color:lightblue; width: 320px; margin-left: 0px;margin-top:-20px; height: 3px;"><br>
+
+   <div class="card row" style="width: 800px;;margin-left:20px; padding: 10px;margin-top: 70px; background: white; border-radius: 3px;">
+        
+            <img src="{%static 'user.png'%}"style="width: 185px; margin-top: -125px;">
+           	<div class="row" style="display: inline-block;margin-left: 20px; ">
+           		 <span style="font-size: 40px;">{{paciente.nombre}} {{paciente.apellido1}} {{paciente.apellido2}}</span><br>
+            	 <span style="font-size: 25px;"> {{paciente.rut}} </span><br>
+            	 <h5 class="slert alert-warning" style="max-width: 580px;" >PRECAUCIÓN!! <br>Al dar de baja al paciente se van a restringir ciertas opciones de visitas y modificación de información</h5>
+           	</div>
+            
+        <div class="card-footer">
+          	<h3 class="card-title">¿Desea Dar de Baja al Paciente?</h3>
+            <input class="btn btn-danger" type="submit" value="Continuar">
+            <a href='{%  url "listpaciente"%}' class="btn btn-info">Volver</a>
+        </div>
+    </div> 
+</form>  
+   
+
+
+{% endblock %}

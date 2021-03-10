@@ -1,0 +1,50 @@
+<!--DOCTYPE html -->
+{%extends "base.html"%}
+
+
+<title> {%block head_title %} Hora | {{block.super}} {%endblock head_title%} </title>	
+
+{%  block content %}
+
+<style>
+
+	input[type=text] {
+  		border: 2px solid lightblue;
+  		border-radius: 4px;
+}
+
+	input[type=date] {
+  		border: 2px solid lightblue;
+  		border-radius: 4px;
+  		height: 8%
+}  
+
+
+
+</style>
+
+
+
+<h1>Agendar Hora</h1>
+
+<h2><label> {{px.nombre}} {{px.apellido1}} {{px.apellido2}} </label></h2>
+
+</br>
+<form method='POST' action=''>
+	{%  csrf_token %}
+
+
+<p>
+<label for="fecha"> Fecha Visita</label></br>
+<input type="date" name="fecha"  id="fecha">
+</p>
+
+
+</p>
+
+
+<input type="submit" value="Modificar Visita" class="btn btn-info"/>
+</form>
+
+{%  endblock content %}
+

@@ -1,0 +1,80 @@
+<!--DOCTYPE html -->
+{%  extends "base_tutor.html" %}
+
+<title> {%block head_title %} {{obj.nombre}} {{obj.apellido1}} {{obj.apellido2}} | {{block.super}} {%endblock head_title%} </title>
+
+
+{%block content%}
+
+<style>
+
+.row {
+
+    display: block;
+    font-size: 10em;
+    padding-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+</style>
+
+<div class="card text-center">
+  <div class="card-header">
+    <h1>{{obj.nombre}} {{obj.apellido1}} {{obj.apellido2}} </h1>
+  </div>
+
+  <div class="row row-col-3">
+  
+  
+    <div class="col-lg-10">
+      
+            <table class="table user-list" style="width: 130%;margin-left: -30px;"  >
+                <thead>
+                    <tr>    
+                    <th><span>Episodio</span></th>
+                    <th><span>Opciones</span></th>                          
+                    </tr>
+                </thead>
+                <tbody>
+    
+    
+    
+    
+                  {% for i in episodio %}
+                    <tr>
+                        <td style="width: 10%">
+                            <a > {{i}}</a>
+                        </td>
+                                                
+                        <td style="width: 10%">
+                      
+                          <a href="{% url 'ver_episodio_numerado_tutor' id=i id_paciente=obj.id %}" class="btn btn-danger"> Ver Episodio </a>                      
+    
+                        </td>
+                    </tr>
+                    
+                    
+                  
+                  
+                  {% endfor %}
+                          
+    
+                </tbody>
+            </table>
+       
+    
+    </div>
+    
+   
+  
+      <a href='{% url "home_t" %}' class="btn btn-danger" role="button">Volver</a></br>
+     
+  
+  
+  
+
+
+{%endblock content%}
+

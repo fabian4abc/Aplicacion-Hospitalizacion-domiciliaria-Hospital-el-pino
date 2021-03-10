@@ -1,0 +1,78 @@
+{%extends "base.html"%}
+
+{%  block content %}
+
+<style type="text/css">
+	
+h1{
+	
+	font-size: 45px;
+	
+}
+
+span{
+	
+	font-size:30px; 
+
+}
+
+label{
+	font-size: 25px;
+	
+}
+
+label > span{
+	font-size: 20px;
+}
+
+.contenedor{
+
+	margin-top: 30px;
+	padding: 5px; 
+	width: 350px; 
+	margin-top: 0px; 
+	margin-left: -70px;
+	border-radius: 3px; 
+}
+
+
+
+</style>
+
+
+
+
+
+<div class="contenedor">
+	 
+
+	 <form method="post" enctype="multipart/form-data">
+    	{% csrf_token %}
+    	<div>
+	 	<h1>F<span>ormulario de </span>  A<span>rchivos:</span></h1>
+		</div>
+	
+    	<div style="padding: 10px">
+    		<label> N<span>ombre</span> A<span>rchivo:</span></label><br>
+    		{{ form.nombre }}
+    	</div>
+    	<div style="padding:10px;">
+    		<label>A<span>rchivo:</span></label>
+    		{{form.file}} <br>	
+    	</div>
+    	<div style="padding: 10px">
+    		<label for="paciente"></label>
+    		<input type="text" id="paciente" name="paciente" value="{{id}}" hidden>
+    	</div>
+
+
+    	<div>
+    		 <button type="submit" class="btn btn-info">Subir Archivo</button>
+    		<a href="{% url 'listpaciente'%}"class="btn btn-info"> volver </a>
+    	</div>
+   		  
+  </form>
+  
+</div>
+
+{%  endblock content %}

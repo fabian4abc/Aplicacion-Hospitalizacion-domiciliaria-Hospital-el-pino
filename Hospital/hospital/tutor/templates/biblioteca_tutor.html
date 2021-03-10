@@ -1,0 +1,130 @@
+{%extends "base_tutor.html"%}
+{% load static %}
+
+{%  block content %}
+	<style type="text/css">
+		/* Dropdown Button */
+.dropbtn2 {
+  
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown2 {
+   position: relative;
+  display: inline-block;
+  padding: 0px 20px ;
+  
+}
+
+.dropdown2 img{
+	margin-left:-10px;
+}
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content2 {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  margin-left: 100px;
+  border-radius: 3px;
+  margin-top: -80px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content2 a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content2 a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown2:hover .dropdown-content2 {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+
+
+#subir_archivo{
+	float: right;
+	margin-top: -60px;
+}
+.archivos{
+	width: 900px;
+	border: solid;
+}
+
+
+
+</style>
+
+<div class="container" style="margin-top: 20px;">
+	
+
+	<div class=" row ">
+		
+	<div class="col-sm-12">
+		<h1>Biblioteca</h1><br>
+		{% for arch in archivo %}
+	
+		<div class="dropdown2">
+		  <a class="dropbtn2" href="../..{{arch.file.url}}" download="{{arch.nombre}}"><img src="/static/pdf.png"style="width: 100px;"></a>
+		  
+		  <p style="text-align: center;">{{arch.nombre}}</p>
+		</div>
+		
+		
+		{% endfor %}
+	</div>
+
+
+	<div class="col-sm-12">
+		<h1>Biblioteca Personal</h1><br>
+
+		{% for g in archivo_unico %}
+	
+
+		{% if g.paciente == pxid %}
+
+
+		<div class="dropdown2">
+		  <a class="dropbtn2"><img src="/static/pdf.png"style="width: 100px;"></a>
+		  <div class="dropdown-content2">
+			<a href="../..{{g.file.url}}" download="{{g.nombre}}"> descargar</a>
+		  </div>
+		  <p style="text-align: center;">{{g.nombre}}</p>
+		</div>
+		{% endif %}
+		{% endfor %}
+		</div>
+	</div>
+
+</div>
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+{%endblock%}

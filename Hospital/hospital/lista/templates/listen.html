@@ -1,0 +1,243 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<style>
+
+.table a.table-link.danger {
+    color: #e74c3c;
+}
+.label {
+    border-radius: 3px;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+.user-list tbody td .user-subhead {
+    font-size: 0.875em;
+    font-style: italic;
+}
+.user-list tbody td .user-link {
+    display: block;
+    font-size: 1.25em;
+    padding-top: 3px;
+    margin-left: 60px;
+}
+a {
+    color: #3498db;
+    outline: none!important;
+}
+.user-list tbody td>img {
+    position: relative;
+    max-width: 50px;
+    float: left;
+    margin-right: 15px;
+}
+
+.table thead tr th {
+    text-transform: uppercase;
+    font-size: 0.875em;
+}
+.table thead tr th {
+    border-bottom: 2px solid #e7ebee;
+}
+.table tbody tr td:first-child {
+    font-size: 1.425em;
+    font-weight: 300;
+}
+.table tbody tr td {
+    font-size: 0.975em;
+    vertical-align: middle;
+    border-top: 1px solid #e7ebee;
+    padding: 12px 8px;
+}
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+#lupa{
+    position: relative;
+    left: 267px;
+	
+	top:-37px;
+    font-size: 24px;
+}
+
+#refresh{
+    position: relative;
+    left: 329px;
+	
+	top:-68px;
+    font-size: 24px;
+}
+
+#rut{
+    border:solid 2px #17A2B8;
+}
+
+
+
+</style>
+
+
+
+<!-- Metodo Buscar -->
+
+
+
+
+<!-- FIN -->
+
+
+<hr>
+
+<div class="container"  style="margin-left: -50px;">
+    <h1  style="margin-left: 10px;">Lista de Especialistas</h1> <br>
+    <div class="row" >
+        <div class="col-md-12 search">
+            <form method="get">
+                <div id="custom-search-input" >
+                    <input id="rut" type="text" style="width: 300px; margin-left:15px;" class="form-control" required oninput="checkRut(this)" minlength="1" maxlength="10" placeholder="Ingrese Rut..." name="buscar">
+                    <span class="input-group-list">
+                        <button id="lupa" type="submit" style="border:none;"class="button btn btn-info"><i class="fas fa-search"></i></button></br> 
+                        <a href='{% url "listenfermero" %}'id="refresh" style="border: none;"><i class="fas fa-sync"></i></a>    
+                        
+                    </span>
+                    
+                </div>
+            </form>
+        
+    </div>
+</div>
+    <div class="row" style="margin-top:-50px;">
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>    
+                                <th><span>Foto</span></th>
+                                <th><span>Nombre Completo</span></th>
+                                <th><span>Rut</span></th>
+                                <th class="text-center"><span>Especialidad</span></th>
+                                <th><span>Email</span></th>
+                                <th><span>Opciones:</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	{% for obj in object_list %}
+                            	
+
+                                <tr>
+                                   	<td>
+                                        <img id="myBtn"  src="../../..{{obj.file.url}}" width="100%" alt="{{ obj.id_perfil.usuario.first_name}} {{ obj.id_perfil.usuario.last_name}}">
+                                    </td>
+                                    <td>                                      
+                                        <span style="font-size: 20px;" class="user-subhead">{{ obj.id_perfil.usuario.first_name}} {{ obj.id_perfil.usuario.last_name}}</span>
+                                    </td>
+                                    <td>{{obj.rut}}</td> 
+                                    <td class="text-center">
+                                    	{%if obj.especialidad == "ENFERMERO"%}
+                                        <span  class="badge badge-info">Enfermero</span>
+                                        {%endif%}
+                                    	{%if obj.especialidad == "KINESIOLOGO" %}
+                                        <span class="badge badge-success">Kinesiologo</span>
+                                        {%endif%}
+                                    	{%if obj.especialidad == "TECNICO" %}
+                                        <span class="badge badge-warning">Técnico</span>
+                                        {%endif%} 
+                                        {%if obj.especialidad == "MEDICO" %}
+                                        <span  class="badge badge-danger">Médico</span>
+                                        {%endif%}   
+
+                                    </td>
+                                    <td>
+                                        <a >{{obj.id_perfil.usuario.email}}</a>
+                                    </td>
+                                    <td style="width: 20%;">
+        							
+        								<a href='{% url "especialista_detalle" id=obj.id %}' class="btn btn-info"> Detalle </a>                                                               
+                                    </td>
+
+                                    	
+                                </tr>
+                                {%endfor%}
+                                </tbody>
+                                </table>
+
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                     
+
+<script>
+
+
+    function checkRut(rut) {
+    // Despejar Puntos
+    var valor = rut.value.replace('.','');
+    // Despejar Guión
+    valor = valor.replace('-','');
+    
+    // Aislar Cuerpo y Dígito Verificador
+    cuerpo = valor.slice(0,-1);
+    dv = valor.slice(-1).toUpperCase();
+    
+    // Formatear RUN
+    rut.value = cuerpo + '-'+ dv
+    
+    // Si no cumple con el mínimo ej. (n.nnn.nnn)
+    if(cuerpo.length < 7) { rut.setCustomValidity("RUT Incompleto"); return false;}
+    
+    // Calcular Dígito Verificador
+    suma = 0;
+    multiplo = 2;
+    
+    // Para cada dígito del Cuerpo
+    for(i=1;i<=cuerpo.length;i++) {
+    
+        // Obtener su Producto con el Múltiplo Correspondiente
+        index = multiplo * valor.charAt(cuerpo.length - i);
+        
+        // Sumar al Contador General
+        suma = suma + index;
+        
+        // Consolidar Múltiplo dentro del rango [2,7]
+        if(multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+    
+    }
+    
+    // Calcular Dígito Verificador en base al Módulo 11
+    dvEsperado = 11 - (suma % 11);
+    
+    // Casos Especiales (0 y K)
+    dv = (dv == 'K')?10:dv;
+    dv = (dv == 0)?11:dv;
+    
+    // Validar que el Cuerpo coincide con su Dígito Verificador
+    //if(dvEsperado != dv) { rut.setCustomValidity("RUT Inválido"); return false; }
+    
+    // Si todo sale bien, eliminar errores (decretar que es válido)
+    rut.setCustomValidity('');
+}
+</script>
+
+{% endblock %}

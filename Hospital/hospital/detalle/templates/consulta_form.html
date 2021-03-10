@@ -1,0 +1,153 @@
+<!--DOCTYPE html -->
+{%  extends "base.html" %}
+{% load static %}
+
+{%  block content %}
+
+<!DOCTYPE html>
+<html>
+<title>Home | Hospital El Pino</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+
+input[type=box] {
+  width: 100%;
+  padding: 80px 20px;
+  margin: 8px 2;
+  box-sizing: border-box;
+}
+
+.logo img{
+  width:90px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+        }
+
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #30AED3;
+  color: white;
+  padding: 14px 50px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.block:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+</style>
+<body class="w3-light-grey">
+
+<div class="card text-center">
+
+
+  <div class="card-header">
+    <h1> Resolución Consultas </h1>
+    
+            <div class="logo">
+                <img src="{% static 'logo.png'%}">          
+            </div>
+            <div class="title">
+
+             <form method="POST">
+              {% csrf_token%} 
+
+
+               
+
+                <div>
+                  <label for=id_tutor></label>
+                  <input name="id_tutor" type=hidden id="id_tutor" value={{usr.id_tutor}}>
+                </div>
+
+
+                <div>
+                  <label for=id_usuario></label>
+                  <input name="id_usuario" type=hidden id="id_usuario" value={{usr.id_usuario}}>
+                </div> 
+
+              Titulo</br>
+                <div>
+                  <label for=titulo></label>
+                  <input name="titulo" id="titulo" width="200" value="{{usr.titulo}}" readonly>
+                </div> 
+
+
+              
+              Rut</br>
+                <div>
+                  <label for=rut></label>
+                  <input name="rut" style="text-align:center; id="rut" value="{{usr.rut}}" readonly>
+                </div> 
+
+              </br>
+                <div>
+                  <label for=estado></label>
+                  <input name="estado" type=hidden id="estado" value=1>
+                </div>                 
+
+
+              Mensaje</br>
+                <div>
+                  <label for=mensaje></label>
+                  <input name="mensaje" type=box id="mensaje" value="{{usr.mensaje}}" readonly>
+                </div> 
+
+              Respuesta </br>
+                <div>
+                  <label for=respuesta></label>
+                  <input name="respuesta" type=box id="respuesta" placeholder="Inserte Respuesta..." maxlength="400">
+                </div> 
+
+             </br>
+
+              <button class="btn btn-info" type="submit">Enviar</button>
+              </form>            
+
+
+
+
+
+
+            </div>
+
+
+  </div>
+  <div class="card-body">
+    <p class="card-text"></p>
+    
+    <a href='{%  url "listconsulta" %}'> <button class="block"> Volver </button></a> </br> 
+    
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
+
+
+{%  endblock content %}
+

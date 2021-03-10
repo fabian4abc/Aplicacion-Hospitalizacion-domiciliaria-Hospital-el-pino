@@ -1,0 +1,55 @@
+<!--DOCTYPE html -->
+{% load static %}
+<html>
+<head>
+<title> {%block head_title %} Portal del Funcionario {%endblock head_title%} </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="telephone=no" name="format-detection">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body >
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <a class="navbar-brand" href="{% url 'home_e' %}" style="color: white;margin-right:20px;"><img src="{% static 'logo.png'%}" width="50" style="margin-right:20px;" >   Portal Funcionario </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a href='{%  url "visitas_esp" %}' style="color: white;" class="nav-link">Visitas Programadas</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle "style="color: white;" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Perfil</a>
+          <div class="dropdown-menu ">
+            <a class="dropdown-item" href="{%  url 'perfil_e' %}" class="nav-link"> Ver Perfil</a>
+            <a  class="dropdown-item" href="{%url 'Contra_edit' %}" class="nav-link">Cambiar Contraseña</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href='{%  url "biblioteca_e" %}' style="color: white;" class="nav-link">Biblioteca</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a href="{% url 'logout'%}"  style="color: white;" class="nav-link">Log Out ({{ actual }})</a>
+        </li>
+      </ul>
+      
+    </div>
+  </nav>
+{% block content%}
+{%endblock%}
+
+<!--botstrap js jquery-->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+

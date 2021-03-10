@@ -1,0 +1,341 @@
+<!--DOCTYPE html -->
+{%  extends "base_especialista.html" %}
+{% load static %}
+
+{%  block content %}
+
+<!DOCTYPE html>
+<html>
+<title>Home | Hospital El Pino</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+
+
+input[type=box],textarea {
+  width: 100%;
+  padding: 80px 20px;
+  margin: 8px 2;
+  box-sizing: border-box;
+}
+
+.logo img{
+  width:90px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+        }
+
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #6D213C;
+  color: white;
+  padding: 14px 50px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.block:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+
+.button {
+  background-color: #17A2B8;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  }
+  
+li a{color:black}
+
+#radio1,#radio2,#radio3,#radio4,#radio5{
+  display: none;
+}
+
+#estrella{
+  color: grey;
+  width: 30px;
+  font-size: 40px;
+}
+.clasificacion{
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+#estrella:hover,#estrella:hover ~ #estrella{
+  color: orange;
+}
+
+#radio1:checked ~ #estrella,#radio2:checked ~ #estrella,#radio3:checked ~ #estrella,#radio4:checked ~ #estrella,#radio5:checked ~ #estrella{
+  color: orange;
+}
+</style>
+<body class="w3-light-grey">
+
+<div class="card text-center">
+
+
+  <div class="card-header">
+    <h1> Formulario de Visita </h1>
+    
+            <div class="logo">
+                <img src="{% static 'logo.png'%}">          
+            </div>
+            <div class="title">
+              
+
+
+
+              <form method="POST" name="form_1">
+              {% csrf_token%} 
+
+
+                <b>{{px.nombre}} {{px.apellido1}} {{px.apellido2}} </b></br>
+
+                <div>
+                  <label for=id_visita></label>
+                  <input name="id_visita" id="id_visita" type="hidden" value={{id_visita}}>
+                </div> 
+                  <div>
+                  <label for=h_inicio></label>
+                  <input name="h_inicio" id="h_inicio" type="hidden" value={{h_inicio}}> 
+                </div> 
+
+                <div>
+                  <label for=id_especialista></label>
+                  <input name="id_especialista" id="id_especialista"  type="hidden" value={{id_especialista}}>
+                </div> 
+
+                <div>
+                  <label for=id_paciente></label>
+                  <input name="id_paciente" id="id_paciente"  type="hidden" value={{id_paciente}}>
+                </div> 
+
+
+              </br>
+              <u>ANTECEDENTES MORBIDOS</u></br></br>
+
+                <input type="radio" id="HTA" name="antecedentes" value="HTA">
+                <label for="HTA">HTA &nbsp;</label>
+                <input type="radio" id="DM" name="antecedentes" value="DM">
+                <label for="DM">DM &nbsp;</label>
+                <input type="radio" id="ERC" name="antecedentes" value="ERC">
+                <label for="ERC">ERC &nbsp;</label>
+                <input type="radio" id="HMD" name="antecedentes" value="HMD">
+                <label for="HMD">HMD &nbsp;</label>
+                <input type="radio" id="BISEMANAL" name="antecedentes" value="BISEMANAL">
+                <label for="BISEMANAL">BISEMANAL &nbsp;</label><br>
+                <input type="radio" id="TRIMESTRAL" name="antecedentes" value="TRIMESTRAL">
+                <label for="TRIMESTRAL">TRIMESTRAL &nbsp;</label></br></br>
+
+
+              </br>
+              <u>RED DE APOYO</u></br></br>
+
+                <input type="radio" id="Buena" name="red_apoyo" value=1>
+                <label for="Buena">Buena &nbsp;</label>
+                <input type="radio" id="Regular" name="red_apoyos" value=2>
+                <label for="Regular">Regular &nbsp;</label>
+                <input type="radio" id="Mala" name="red_apoyo" value=3>
+                <label for="Mala">Mala &nbsp;</label></br></br>
+
+
+              </br>
+              <u>INDICE DE BARTHEL</u></br></br>
+
+                <input type="radio" id="Autovalente" name="indice_barthel" value=1>
+                <label for="Autovalente">Autovalente &nbsp;</label>
+                <input type="radio" id="Semivalente" name="indice_barthel" value=2>
+                <label for="Semivalente">Semivalente &nbsp;</label>
+                <input type="radio" id="Dependiente" name="indice_barthel" value=3>
+                <label for="Dependiente">Dependiente &nbsp;</label></br></br>
+
+              </br>
+              <u>ESCALA BRADEN (LPP)</u></br></br>
+
+                <input type="radio" id="Alta" name="escala_braden" value=1>
+                <label for="Alta">Alta &nbsp;</label>
+                <input type="radio" id="Moderada" name="escala_braden" value=2>
+                <label for="Moderada">Moderada &nbsp;</label>
+                <input type="radio" id="Bajo" name="escala_braden" value=3>
+                <label for="Bajo">Bajo &nbsp;</label></br></br>              
+
+
+              </br>
+              <u>ESCALA NORTON (CAIDAS)</u></br></br>
+
+                <input type="radio" id="Alta" name="escala_norton" value=1>
+                <label for="Alta">Alta &nbsp;</label>
+                <input type="radio" id="Moderada" name="escala_norton" value=2>
+                <label for="Moderada">Moderada &nbsp;</label>
+                <input type="radio" id="Bajo" name="escala_norton" value=3>
+                <label for="Bajo">Bajo &nbsp;</label></br></br>           
+
+
+              <u>EVOLUCION</u></br>
+                <div>
+                	<select  class="form-control" id="plantilla" name="plantilla" onchange="cambia()">
+                  	<option>Elije plantilla</option>
+                  	<option value="TRATAMIENTO_IV">TRATAMIENTO_IV</option>
+                  	<option value="TACO">TACO</option>
+                  	<option value="ADMINISTRATIVO">ADMINISTRATIVO</option>
+                  	<option value="CONTROL_EXAMENES">CONTROL EXAMENES</option>
+                  	<option value="PSIQUIATRIA">PSIQUIATRIA</option>
+                  	<option value="CURACIONES">CURACIONES</option>
+                  	<option value="CONTROL_SIGNOS">CONTROL SIGNOS VITALES</option>
+                  	<option value="KINE_RESPIRATORIA">KiNESIOLOGÍA RESPIRATORIA</option>
+                  	<option value="KINE_MOTORA">KiNESIOLOGÍA MOTORA</option>
+                  	<option value="ALIMENTACION">ALIMENTACIÓN</option>
+
+                  </select>
+                  <label for=evolucion></label>
+                  <textarea name="evolucion" type=box id="evolucion" maxlength="400" placeholder="Descripción de la evolución del paciente..." ></textarea>
+                </div> 
+
+              <u>PENDIENTES</u></br>
+                <div>
+                  <label for=pendientes></label>
+                  <input name="pendientes" type=box id="pendientes" maxlength="400" placeholder="Descripción de pendientes..." >
+                </div>
+
+
+              <u>OBSERVACIONES</u></br>
+                <div>
+                  <label for=detalle></label>
+                  <input name="detalle" type=box id="detalle" maxlength="400" placeholder="Descripción detallada de lo realizado..." >
+                </div> 
+
+
+
+
+
+
+              </br></br><u>CALIFICACION</u></br>
+
+                  
+                    <p class="clasificacion">
+                      <input id="radio1" type="radio" name="nota" value="5"><!--
+                      --><label  id="estrella" for="radio1">★</label><!--
+                      --><input id="radio2" type="radio" name="nota" value="4"><!--
+                      --><label id="estrella" for="radio2">★</label><!--
+                      --><input id="radio3" type="radio" name="nota" value="3"><!--
+                      --><label id="estrella" for="radio3">★</label><!--
+                      --><input id="radio4" type="radio" name="nota" value="2"><!--
+                      --><label id="estrella" for="radio4">★</label><!--
+                      --><input id="radio5" type="radio" name="nota" value="1"><!--
+                      --><label  id="estrella" for="radio5">★</label>
+                    </p>
+                  
+
+
+
+                </br><u>COMENTARIOS</u></br>
+                <div>
+                  <label for=comentarios></label>
+                  <input name="comentarios" type=box id="comentarios" maxlength="400" placeholder="Ingrese comentarios de la visita...">
+                </div> 
+
+
+                
+
+                <div>
+                  <label for=episodio></label>
+                  <input name="episodio" type="hidden" id="episodio" value={{px.episodio}} >
+                </div> 
+
+
+
+             </br>
+
+              <button class="button" type="submit">Enviar</button>
+              </form>
+
+
+            </div>
+
+
+  </div>
+  <div class="card-body">
+    <p class="card-text"></p>
+    
+    <a href='{%  url "home_e" %}'> <button class="button"> Volver al Menú Principal </button></a> </br> 
+    
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
+
+
+<script type="text/javascript">
+	
+	 var opt_TRATAMIENTO_IV =`Paciente de {{edad|safe}} años, con diagnóstico de __,en su __ día de hospitalización, se encuentra en __ condiciones generales, signos vitales__, con vía venosa en __ en su __ día.Se administra__.`
+
+	 var opt_TACO="Paciente de {{edad|safe}} años, con diagnóstico de __, en su __ día de hospitalización, se encuentra en __ condiciones generales, signos vitales __, recibiendo tratamiento  __, INR de hoy __, se indica __. Próximo control de INR el __."
+	 var opt_ADMINISTRATIVO="Paciente de {{edad|safe}} años, con diagnóstico de __, en su __ día de hospitalización, se encuentra en __ condiciones generales, signos vitales __, a la espera de __."
+
+	 var opt_CONTROL_EXAMENES="Paciente de {{edad|safe}} años, con diagnóstico de __, en su __ día de hospitalización, se encuentra en __ condiciones generales, signos vitales __, se controlan exámenes que destacan: __.Se indica __."
+
+     var opt_PSIQUIATRIA="Paciente de {{edad|safe}} años, con diagnóstico de __, en su __ día de hospitalización, se encuentra en __ condiciones generales, signos vitales __, se visita junto a __, se indica __."
+
+
+     var opt_CURACIONES="Paciente de {{edad|safe}} años, con diagnóstico de __, en su __ día de hospitalización, se encuentra en __ condiciones generales, signos vitales __, se realiza curación __ (simple/avanzada), en __ ubicada en __(descripción), se utiliza __, se programa próxima curación para el __."
+
+     var opt_CONTROL_SIGNOS="Paciente de {{edad|safe}} años, con diagnóstico de __, en su __ día de hospitalización, se encuentra en __ condiciones generales, signos vitales __."
+
+     var opt_KINE_RESPIRATORIA="Paciente de {{edad|safe}} años, con diagnóstico de __, en su __ día de hospitalización, se encuentra en __ condiciones generales, signos vitales __, se realiza __. Post kinesioterapia __."
+
+     var opt_KINE_MOTORA="Paciente de {{edad|safe}} años, con diagnóstico de __, en su __ día de hospitalización, se encuentra en __ condiciones generales, signos vitales __, se realiza __. Post kinesioterapia __."
+
+     var opt_ALIMENTACION="Paciente de {{edad|safe}} años, con diagnóstico de __, en su __ día de hospitalización, con alimentación __."
+
+
+
+	 function cambia(){
+
+
+		var plantilla;
+		plantilla=document.form_1.plantilla[document.form_1.plantilla.selectedIndex].value;
+		console.log(plantilla)
+		
+			mis_opts=eval("opt_"+plantilla);
+			
+
+			
+					
+				document.form_1.evolucion.value=mis_opts;		
+	};
+	
+
+</script>
+
+{%  endblock content %}
+

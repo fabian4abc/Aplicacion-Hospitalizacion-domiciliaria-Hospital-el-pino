@@ -1,0 +1,40 @@
+{%  extends "base.html" %}
+{% load static %}
+{%block head_title%}
+  Cambiar Contraseña
+{%endblock head_title%}
+{%  block content %}
+
+<div class="container" style="max-width: 800px; margin-top: 20px;">
+	<h1>Cambiar Contraseña</h1><br>
+
+
+	<form method="post">
+  	{% csrf_token %}
+	  <div>
+
+	  	<label>Contraseña Antigua:</label>
+	  	<input type="password" name="old_password" autofocus="" required="" id="id_old_password" class="form-control">
+	  </div>
+	  <div>
+	  	<label>Contraseña Nueva:</label>
+	  	<input type="password" name="new_password1" required="" id="id_new_password1" class="form-control">
+	  </div>
+	  <div>
+	  	  <label>Repetir Contraseña:</label>
+	  	  <input type="password" name="new_password2" required="" id="id_new_password2" class="form-control">
+	  </div><br>
+
+	  <button class="btn btn-info" type="submit">Guardar</button>
+</form>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+{%  endblock content %}

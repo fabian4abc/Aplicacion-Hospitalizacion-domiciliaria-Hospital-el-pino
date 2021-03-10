@@ -1,0 +1,98 @@
+<!--DOCTYPE html -->
+{%  extends "base_tutor.html" %}
+{% load static %}
+
+{%  block content %}
+
+<!DOCTYPE html>
+<html>
+<title>Home | Hospital El Pino</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+
+.logo img{
+  width:90px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #DF3E3A;
+  color: white;
+  padding: 14px 50px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.block:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+</style>
+<body>
+  <div class="card-header">
+    <div class="jumbotron">
+      <div class="logo">
+        <img src="{% static 'logo.png'%}">          
+      </div>
+      <h1 style="text-align: center;">Contáctanos</h1>
+      <div class="title">
+        <form method="POST">
+          {% csrf_token%}
+          <div class="form-group">
+            <label for="id_tutor"></label>
+            <input type="hidden" class="form-control" id="id_tutor" placeholder="Enter email" name="id_tutor" value={{user.id}}>
+          </div>
+          <div class="form-group">
+            <label for="id_usuario"></label>
+            <input type="hidden" class="form-control" id="id_usuario" name="id_usuario" value={{actual.id}}>
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre y Apellido:</label>
+            <input class="form-control" value="{{actual.first_name}} {{actual.last_name}}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="rut">Rut:</label>
+            <input class="form-control" placeholder="{{user.rut}}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="titulo">Titulo:</label>
+            <input class="form-control" id="titulo" placeholder="Inserte Titulo..." name="titulo">
+          </div>
+          <div>
+            <label for=mensaje>Mensaje:</label>
+            <textarea class="form-control" name="mensaje" id="mensaje" placeholder="Inserte Consulta..." maxlength="400"></textarea> 
+          </div>
+          <div>
+            <label for=estado></label>
+            <input name="estado" type="hidden" id="estado" value=0>
+          </div>                 
+          <div>
+            <label for=respuesta></label>
+            <input name="respuesta" type="hidden" id="respuesta" value="Sin Respuesta">
+          </div> 
+          <button class="btn btn-danger" type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="card-text"></p>
+      <a href='{%  url "home_t" %}'> <button class="block"> Volver al Menú Principal </button></a> </br> 
+    </div>
+  </div>
+  </body>
+</html>
+
+{%  endblock content %}

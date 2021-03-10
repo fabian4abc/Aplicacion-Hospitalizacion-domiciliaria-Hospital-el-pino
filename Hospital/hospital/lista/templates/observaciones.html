@@ -1,0 +1,128 @@
+<!--DOCTYPE html -->
+{%  extends "base.html" %}
+
+<title> {%block head_title %} {{px.nombre}} {{px.apellido1}} {{px.apellido2}} | {{block.super}} {%endblock head_title%} </title>
+
+
+{%block content%}
+
+
+<style>
+
+#form {
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+}
+
+#form p {
+  text-align: center;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+
+
+}
+
+#form label {
+  font-size: 20px;
+}
+
+
+input[type="radio"] {
+  display: none;
+  
+}
+
+label {
+  color: orange;
+}
+
+
+
+</style>
+
+
+<div class="card text-center">
+  <div class="card-header">
+    <h1>{{px.nombre}} {{px.apellido1}} {{px.apellido2}} </h1>
+  </div>
+
+                                        <form>
+                                            <p class="clasificacion">
+                                            
+                                                {% if nota <= 1%}
+
+                                             <label for="radio1">★</label>
+                                                
+                                                {% endif %}   
+
+
+                                                {% if nota >= 2 and nota < 3 %}
+
+                                             <label for="radio1">★</label>
+                                             <label for="radio2">★</label>   
+
+                                                {% endif %}
+
+                                                {% if nota >= 3 and nota < 4 %}
+
+                                             <label for="radio1">★</label>
+                                             <label for="radio2">★</label>   
+                                             <label for="radio3">★</label>
+
+                                                {% endif %}
+                                                 
+                                    
+                                                {% if nota >= 4 and nota < 5 %}
+
+                                             <label for="radio1">★</label>
+                                             <label for="radio2">★</label>   
+                                             <label for="radio3">★</label>
+                                             <label for="radio4">★</label>
+
+                                                {% endif %}
+                                             
+                                            
+                                                {% if nota == 5 %}
+
+                                             <label for="radio1">★</label>
+                                             <label for="radio2">★</label>   
+                                             <label for="radio3">★</label>
+                                             <label for="radio4">★</label>
+                                             <label for="radio5">★</label>
+
+                                                {% endif %}
+                                             
+                                            
+                                             
+                                            
+                                            </p>
+                                        </form>
+
+                                        {{nota}} estrellas
+
+
+  <div class="card-body">
+   </br></br><u> <h3 class="card-title"> OBSERVACIONES </h3></u></br>
+
+
+    {%for i in fx%}
+
+    {% if i.id_paciente == px.id %}
+
+    <p class="card-text"> {{i.comentarios}} </p>
+    
+    {%endif%}
+    {% endfor %}
+
+    </br>
+
+    <a href='{% url "reingreso" %}' class="btn btn-info" role="button">Volver</a>
+    
+
+
+{%endblock content%}
+

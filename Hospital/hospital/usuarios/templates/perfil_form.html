@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>Datos del Perfil <h1>
+
+	<hr style="background-color:lightblue; width: 320px; margin-left: 0px; height: 3px;">
+
+<div class="col-sm-5">
+	<form method="POST">
+	{% csrf_token%}
+
+	<div>
+		<label>Rol de usuario:</label>
+		{{form.rol}}
+
+	</div>
+	<br>
+	<div>
+		<label>Telefono:</label>
+		<input type="text" class="form-control" name="tel" id="tel" minlength="1" maxlength="10" placeholder="+56">
+	</div><br><br>
+	
+	
+	<button  class="btn btn-info" type="submit">guardar</button>
+	
+</form>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

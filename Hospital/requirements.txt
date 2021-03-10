@@ -1,0 +1,9 @@
+django
+djangorestframework
+gunicorn
+coverage
+django-heroku
+django-cors-headers
+mysqlclient
+requests
+numpy

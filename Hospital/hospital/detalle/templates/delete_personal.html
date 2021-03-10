@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<form  method="POST">
+	{% csrf_token%}
+	<h1>Eliminar Personal</h1><br>
+	<hr style="background-color:lightblue; width: 320px; margin-left: 0px;margin-top:-20px; height: 3px;"><br>
+
+
+
+	<div class="card mb-3" style="max-width: 540px;">
+		<div class="row no-gutters">
+		  <div class="col-md-4">
+         <img id="myBtn"  src="../../..{{personal.file.url}}" width="100%" alt="{{ obj.id_perfil.usuario.first_name}} {{ obj.id_perfil.usuario.last_name}}">
+		  </div>
+		  <div class="col-md-8">
+			<div class="card-body">
+			  <h5 class="card-title">{{user.first_name}} {{user.last_name}} </h5>
+           <p class="card-text">{{personal.rut}} <br>
+            {% if personal.especialidad == "ENFERMERO" %}
+            <span style="font-size: 25px;">Enfermero</span> 
+            {% endif %}
+            {% if personal.especialidad == "KINESIOLOGO" %}
+               <span style="font-size: 25px;">Kinesiólogo</span> 
+            {% endif %}
+            {% if personal.especialidad == "TECNICO" %}
+               <span style="font-size: 25px;">Técnico</span> 
+            {% endif %}
+            {%if e.especialidad == "MEDICO" %}
+            <span class="label label-danger">Médico</span>
+            {%endif%}  
+			  <p class="card-text"><small class="text-muted"> <h3 class="card-title">¿Desea Eliminar al Tutor?</h3>
+				<input class="btn btn-danger" type="submit" value="Eliminar">
+				<a href="{% url 'especialista_detalle' id=personal.id %}" class="btn btn-info" role="button">Volver</a></p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+
+	</form>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

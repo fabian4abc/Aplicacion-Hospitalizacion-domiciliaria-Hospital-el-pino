@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<style type="text/css">
+	
+	table{
+		width: 300px;
+		height: 100px;
+		
+	}
+
+	th{
+		min-width:280px; 
+		font-size: 20px;
+
+	}
+	td{
+		min-width:280px; 
+		
+
+	}
+
+
+	a:link{
+		text-decoration: none;
+
+	}
+
+</style>
+
+<div class="row">
+
+	
+	<div class="col-sm-6"> 
+		<br>
+
+	
+		<table>
+			<thead>
+				<h1>Datos del usuario<h1><hr style="background-color:lightblue; width: 320px; margin-left: 0px; height: 3px;">
+			</thead>
+			<tbody>
+				<tr>
+					<th>Username:</th>
+					<td> {{usuario.username}} </td>
+				</tr>
+				<tr>
+					<th>Nombre Completo: </th>
+					<td>{{usuario.first_name}} {{usuario.last_name}}</td>
+				</tr>
+				<tr>
+					<th>Correo Electronico:</th>
+					<td>{{usuario.email}}</td>
+				</tr>
+
+			</tbody>
+		</table>
+		<br>
+		<h1>Datos Perfil</h1><br>
+		<hr style="background-color:lightblue; width: 320px; margin-left: 0px;margin-top:-20px; height: 3px;">
+		<table>
+			<tbody>
+				<tr>
+					<th>Rol:</th>
+					<td>{{perfil.rol}}</td>
+				</tr>
+				<tr>
+					<th>N° Telefonico:</th>
+					<td>{{perfil.tel}}</td>
+				</tr>
+				
+			</tbody>
+		</table>
+
+		
+
+		
+		
+	</div>
+	{% if perfil.rol == "TUTOR" %}
+	<div class="col-sm-6" style="margin-top: 15px;">
+	
+		
+
+		
+
+		<h1>Datos de Tutor</h1>
+		<br>
+		<hr style="background-color:lightblue; width: 320px; margin-left: 0px;margin-top:-20px; height: 3px;">
+		<br>
+			<table>
+			<tbody>
+				<tr>
+					<th>Rut:</th>
+					<td>{{tutor.rut}}</td>
+				</tr>
+				<tr>
+					<th>Comuna:</th>
+					<td>{{tutor.comuna}}</td>
+				</tr>
+
+				<tr>
+					<th>Domicilio:</th>
+					<td>{{tutor.domicilio}}{{tutor.num_domicilio}}</td>
+				</tr>
+				
+				<tr>
+					<th>Fecha de nacimiento:</th>
+					<td>{{tutor.f_nacimiento}}</td>
+				</tr>
+			</tbody>
+		</table>
+        <br>
+		<h1>Datos de Paciente</h1>
+		<br>
+		<hr style="background-color:lightblue; width: 320px; margin-left: 0px;margin-top:-20px; height: 3px;">
+		<br>
+			<table>
+			<tbody>
+				<tr>
+					<th>Nombre:</th>
+					<td>{{paciente.nombre}}</td>
+				</tr>
+				<tr>
+					<th>Apellidos:</th>
+					<td>{{paciente.apellido1}} {{paciente.apellido2}}</td>
+				</tr>
+				<tr>
+					<th>Rut:</th>
+					<td>{{paciente.rut}}</td>
+				</tr>
+				<tr>
+					<th>Comuna:</th>
+					<td>{{paciente.comuna}}</td>
+				</tr>
+
+				<tr>
+					<th>Domicilio:</th>
+					<td>{{paciente.domicilio}}{{paciente.num_domicilio}}</td>
+				</tr>
+				
+				<tr>
+					<th>Fecha de nacimiento:</th>
+					<td>{{paciente.f_nacimiento}}</td>
+				</tr>
+				<tr>
+					<th>Estado de Paciente:</th>
+					<td>{{paciente.desc}}</td>
+				</tr>
+				
+			</tbody>
+		</table>
+		<div style="  margin-left:-590px; margin-top: -80px; width: 400px;">
+			<a href="{% url 'listtutor' %}" class="btn btn-info btn-block">Finalizar Registro</a>
+			
+		</div>
+		
+	</div>
+	
+	{% else %}
+	{% if  perfil.rol == "PERSONAL" %}
+	<div class="col-sm-6" style="margin-top: 15px;">
+		
+
+		
+		<h1> Datos de Personal</h1><br>
+		<hr style="background-color:lightblue; width: 320px; margin-left: 0px;margin-top:-20px; height: 3px;">
+		<br>
+			<table>
+			<tbody>
+				<tr>
+					<td> <img id="myBtn"  src="../../..{{personal.file.url}}" width="50%"></td>
+				</tr>
+				<tr>
+					<th>Rut:</th>
+					<td>{{personal.rut}}</td>
+				</tr>
+				<tr>
+					<th>Especialidad:</th>
+					<td>{{personal.especialidad}}</td>
+				</tr>
+			</tbody>
+			</table>
+		
+		<div style="margin-top: 30px;">
+			<a id="fin" href="{% url 'listenfermero' %}" class="btn btn-info btn-block" >Finalizar Registro</a>
+		</div>
+		
+	</div>
+
+	{% else %}
+	{% if perfil.rol == 'ADMINISTRADOR' %}
+	<div style="margin-top: 400px;">
+		<a  href="{% url 'dash' %}" class="btn btn-success btn-block "  >Finalizar Registro</a>
+	</div>
+	{% endif %}
+	{% endif %}
+	{% endif %}
+
+</div>
+
+{% endblock %}

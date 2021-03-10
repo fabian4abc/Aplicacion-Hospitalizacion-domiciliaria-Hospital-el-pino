@@ -1,0 +1,65 @@
+{% extends "base_tutor.html" %}
+
+
+{% block content %}
+<div class="container" style="margin-top: 20px;">
+	<h1>Datos de Paciente</h1>
+	<form method="POST">
+		{% csrf_token%}
+		<div class="row">
+			<div class="col-sm-5">
+			<div>
+			<label for=id_tutor></label>
+			<input type="hidden" name="id_tutor" id="id_tutor" value="{{tutor.id}}">
+			</div>
+			<div>
+			<label for=nombre></label>
+			<input type="hidden" name="nombre" id="nombre" value="{{paciente.nombre}}">
+			</div>
+			<div>
+			<label for=apellido1></label>
+			<input type="hidden" name="apellido1" id="apellido1" value="{{paciente.apellido1}}">
+			</div>
+			<div>
+			<label for=apellido2></label>
+			<input type="hidden" name="apellido2" id="apellido2" value="{{paciente.apellido2}}">
+			</div>
+			<div>
+			<label for=rut></label>
+			<input type="hidden" name="rut" id="rut" value="{{paciente.rut}}">
+			</div>
+			<div>
+			<label for=f_nacimiento></label>
+			<input type="hidden" name="f_nacimiento" id="f_nacimiento" value="{{paciente.f_nacimiento}}">
+			</div>
+			<div>
+			<label for=edad_paciente></label>
+			<input type="hidden" name="edad_paciente" id="edad_paciente" value="{{paciente.edad_paciente}}">
+			</div>
+		</div>
+		<div class="col-sm-5" style="margin-left: -430px;">
+			<div>
+				<label>Comuna:</label>
+				{{form.comuna}}
+			</div>
+			<div>
+				<label>Domicilio</label>
+				{{form.domicilio}}
+			</div>
+			<div>
+				<label>N° Domicilio:</label>
+				{{form.num_domicilio}}
+			</div>
+			<div>
+			<label for=desc></label>
+			<input type="hidden" name="desc" id="desc" value="{{paciente.desc}}">
+			</div>
+		</div>
+		<br>
+		<div>
+			<button class="btn btn-danger" type="submit">guardar</button>
+		</div>
+	</form>
+</div>
+{% endblock %}
+

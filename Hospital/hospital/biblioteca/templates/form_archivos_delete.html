@@ -1,0 +1,22 @@
+{%extends "base.html"%}
+
+{%  block content %}
+	<form method="POST">
+    {% csrf_token %}
+    <div class="card" style="width: 800px;margin-top:20px;margin-left:20px;">
+        <h2 class="card-header" >
+            <img src="/static/pdf.png"style="width: 100px;">
+            <span style="font-size: 30px;">{{archivo.nombre}}</span> <br>
+            
+            
+        <div class="card-footer">
+          <h3 class="card-title">Desea Eliminar el archivo:</h3>
+          <p class="card-text" ></p>
+            <button class="btn btn-info" type="submit">Eliminar</button>
+            <a href="{% url 'biblioteca'%}" class="btn btn-info">Volver </a>
+        </div>
+      </div>
+ 
+</form>
+
+{%  endblock content %}

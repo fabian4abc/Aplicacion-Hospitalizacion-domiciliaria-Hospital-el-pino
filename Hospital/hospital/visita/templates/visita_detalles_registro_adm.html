@@ -1,0 +1,33 @@
+<!--DOCTYPE html -->
+{%  extends "base.html" %}
+
+<title> {%block head_title %} Detalle Visita | {{block.super}} {%endblock head_title%} </title>
+
+
+{%block content%}
+
+<div class="card text-center">
+  <div class="card-header">
+    <h1>  Detalle Visita </h1>
+  </div>
+  <div class="card-body">
+  
+    <p class="card-text"> 
+
+          <b>Evolución del Paciente</b></br>
+          {{f.evolucion}}</br></br>
+          <b>Pendientes del Paciente</b></br>
+          {{f.pendientes}}</br></br>
+          <b>Observaciones del Paciente</b></br>
+          {{f.detalle}}</br></br>
+
+     </p>
+
+
+    
+
+    <a href='{%  url "agendar_lista" %}' class="btn btn-info" role="button">Volver</a>
+
+
+{% endblock content %}
+

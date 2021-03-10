@@ -1,0 +1,42 @@
+<!--DOCTYPE html -->
+{%  extends "base_tutor.html" %}
+
+<title> {%block head_title %} {{usr.first_name}} {{usr.last_name}} | {{block.super}} {%endblock head_title%} </title>
+
+
+{%block content%}
+
+
+
+<div class="card text-center">
+  <div class="card-header">
+    <h1> Contacto Hospital </h1>
+  </div>
+
+  {% if cont == 0 %}
+
+  <div class="card-body">
+  
+    <p class="card-text">Pronto se actualizaran los datos para reagendar su visita, muchas gracias.</p>
+    
+  {%else%}  
+
+  <div class="card-body">
+
+      
+  
+    <p class="card-text">Numero de telefono: {{i.tel}} </p>
+    <p class="card-text">Correo: {{i.correo}} </p>
+    <p class="card-text"> {{i.texto_explicativo}} </p>
+
+      
+
+  {%endif%}
+
+
+
+    <a href='{%  url "visita_paciente" %}' class="btn btn-danger" role="button">Volver</a>
+
+
+{% endblock content %}
+

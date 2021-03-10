@@ -1,0 +1,52 @@
+<!--DOCTYPE html -->
+{%  extends "base_tutor.html" %}
+
+<title> {%block head_title %} {{usr.first_name}} {{usr.last_name}} | {{block.super}} {%endblock head_title%} </title>
+
+
+{%block content%}
+
+<div class="card text-center">
+  <div class="card-header">
+    <h1>  Detalle Visita </h1>
+  </div>
+  <div class="card-body">
+  
+   <div class="card text-center">
+  <div class="card-header">
+  	<div class="card-title">
+  		<strong>Visita n° {{form.id_visita}}</strong> 
+
+  	</div>
+  	<div class="card-body">
+  		<div class="row">
+  			<div class="col-sm-12">
+  			<strong>Personal:</strong> {{user.first_name}} {{user.last_name}}<br><br>
+  			<strong>Fecha:</strong> {{visita.fecha}}<br><br>
+  			<strong>Detalle:</strong><br>{{form.detalle}}<br><br>
+			<strong>Evolución:</strong><br>{{form.evolucion}}<br><br>
+			<strong>Pendientes:</strong><br>{{form.pendientes}}<br><br>
+		
+			
+		
+  		</div>
+
+ 
+
+	
+
+  	</div>
+  </div>
+</div>
+</div>
+</div><a href='{%  url "visita_paciente" %}' class="btn btn-danger" role="button">Volver</a>
+</div>
+
+    
+    
+
+ 
+
+
+{% endblock content %}
+

@@ -1,0 +1,135 @@
+<!--DOCTYPE html -->
+{%extends "base_tutor.html"%}
+<title> {%block head_title %} Hora | {{block.super}} {%endblock head_title%} </title>	
+{%  block content %}
+
+<style>
+    .table a.table-link.danger {
+        color: #e74c3c;
+    }
+    .label {
+        border-radius: 3px;
+        font-size: 0.875em;
+        font-weight: 600;
+    }
+    .user-list tbody td .user-subhead {
+        font-size: 0.875em;
+        font-style: italic;
+    }
+    .user-list tbody td .user-link {
+        display: block;
+        font-size: 1.25em;
+        padding-top: 3px;
+        margin-left: 60px;
+    }
+    a {
+        color: #3498db;
+        outline: none!important;
+    }
+    .user-list tbody td>img {
+        position: relative;
+        max-width: 50px;
+        float: left;
+        margin-right: 15px;
+    }
+
+    .table thead tr th {
+        text-transform: uppercase;
+        font-size: 0.875em;
+    }
+    .table thead tr th {
+        border-bottom: 2px solid #e7ebee;
+    }
+    .table tbody tr td:first-child {
+        font-size: 1.125em;
+        font-weight: 300;
+    }
+    .table tbody tr td {
+        font-size: 0.875em;
+        vertical-align: middle;
+        border-top: 1px solid #e7ebee;
+        padding: 12px 8px;
+    }
+</style>
+
+<div class="container bootstrap snippet" style="max-width: 90%;">
+    <h1>Lista de Consultas</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list" >
+                            <thead>
+                                <tr>    
+                                <th><span>Id Consulta</span></th>
+                                <th><span>Titulo</span></th>
+                                <th><span>Estado</span></th>
+                                <th><span>Ver Respuesta</span></th>
+                                <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	{% for consulta in con %}
+                                   {%if consulta.id_usuario == aux%}  
+                                        {%if consulta.estado == 1%}
+                                            <tr>
+										        {% for obj in tutor %}
+											        {% if obj.id == consulta.id_tutor %}
+                                                        <td>{{consulta.id}}</td>            
+										            {%endif%}
+                                                {%endfor%}
+                                                <td>
+                                                    <a>{{consulta.titulo}}</a>
+                                                </td>
+                                                <td>
+                                                    {% if consulta.estado == 0 %}
+                                                        <span class="label label-default">Pendiente</span>
+                                                    {%endif%}
+                                                    {% if consulta.estado == 1 %}
+                                                        <span class="label label-success">Resuelta</span>
+                                                    {%endif%}                                        
+                                                </td>                            
+                                                <td style="width: 20%;">
+                                                <a href='{%  url "ver_respuesta" id=consulta.id %}' class="btn btn-danger"> Ver Respuesta </a>
+                                                </td>
+                                            </tr>
+                                        {%endif%}
+                                    {%endif%}
+								{% endfor %}
+                                {% for consulta in con %}
+                                    {%if consulta.id_usuario == aux%}  
+                                        {%if consulta.estado  == 0%}
+                                            <tr>
+                                                {% for obj in tutor %}
+                                                    {% if obj.id == consulta.id_tutor %}
+                                                        <td>{{consulta.id}}</td> 
+                                                    {%endif%}
+                                                {%endfor%}
+                                                <td>
+                                                    <a>{{consulta.titulo}}</a>
+                                                </td>
+                                                <td>
+                                                    {% if consulta.estado  == 0 %}
+                                                        <span class="label label-default">Pendiente</span>
+                                                    {%endif%}
+                                                    {% if consulta.estado  == 1 %}
+                                                        <span class="label label-success">Resuelta</span>
+                                                    {%endif%}                                        
+                                                </td>                            
+                                                <td style="width: 20%;">
+                                                <a href='{%  url "ver_respuesta" id=consulta.id %}' class="btn btn-danger"> Ver Respuesta </a>
+                                                </td>
+                                            </tr>
+                                        {%endif%}
+                                    {%endif%}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%  endblock content %}

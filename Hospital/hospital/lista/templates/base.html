@@ -1,0 +1,281 @@
+{% load static %}
+<html>
+  <head>
+    <title> {%block head_title%} Hospital El Pino {%endblock head_title%} </title>
+    <!-- Latest compiled and minified CSS -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script src="https://kit.fontawesome.com/651f03e613.js" crossorigin="anonymous"></script>
+
+    <!-- icono -->
+    <link rel = "icon" href ="lista/static/logo_base.png">
+</head>
+
+<style type="text/css">
+  body{
+    background: #EFEDED;
+  }
+</style>
+
+
+<body>
+  <!--    INICIO DE NAVBAR  -->
+  <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'dash' %}" style="color: white;margin-right:20px;"><img src="{% static 'logo.png'%}" width="50" style="margin-right:20px; margin-top: -10px;" ></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'dash' %}">
+            <i class="fa fa-home" style="color:rgb(65, 153, 144)"></i>
+            Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'listusuarios' %}">
+            <i class="fas fa-users" style="color:rgb(65, 153, 144)"></i>
+            </i>
+            <t style="color:white">Usuarios</t>
+            
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-injured" style="color:rgb(65, 153, 144)"></i>
+            </i>
+            <t style="color:white">Pacientes</t>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{%url 'listpaciente' %}">Actuales</a>
+            <a class="dropdown-item" href="{% url 'reingreso' %}">Antiguos</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{%  url 'listtutor' %}">Listado de tutores</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-md" style="color:rgb(65, 153, 144)"></i>
+            </i>
+            <t style="color:white">Especialistas</t>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{%url 'listenfermero' %}">Listado de especialistas</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'listar-equipo'%}">Equipos medicos</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ambulance" style="color:rgb(65, 153, 144)"></i>
+              <span class="badge badge-primary">{{visitas_nav}}</span>
+            </i>
+            <t style="color:white">Visitas y Planificacion</t>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href='{%  url "agendar_lista_hoy" %}'>Asignar Visitas (HOY) <span class="badge badge-primary">{{visitas_nav}}</span></a>
+            <a class="dropdown-item" href='{% url "agendarvisita" %}'>Agendar Visitas</a>
+            <a class="dropdown-item" href='{%  url "agendar_lista" %}'>Visitas agendadas</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href='{%  url "planificar" %}'>Planificar rutas</a>
+            <a class="dropdown-item" href='{% url "lista_rutas" %}'>Listado de rutas</a>
+          </div>
+        </li>
+      </ul>
+      <ul class="navbar-nav ">
+
+        <!-- NO SE ESTA UTILIZANDO, SE DEJA POR SI SE RETOMA A FUTURO, <CONSULTAS>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'listconsulta'%}">
+            <i class="fa fa-bell" style="color:rgb(65, 153, 144)">
+              <span class="badge badge-warning">CAMBIAR POR UN CONTADOR GLOBAL DE CONSULTAS, REVISAR LISTA -> CONTEXT_PROCESSORS.PY</span>
+            </i>
+            <t style="color:white">Consultas</t>
+          </a>
+        </li>
+      -->
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'biblioteca'%}">
+            <i class="fas fa-book" style="color:rgb(65, 153, 144)">
+              <span class="badge badge-warning">{{archivos_nav}}</span>
+            </i>
+            <t style="color:white">Biblioteca</t>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout'%}">
+            <i class="fas fa-sign-out-alt" style="color:rgb(65, 153, 144)"></i>
+            </i>
+            <t style="color:white">Logout</t>
+          </a>
+        </li>
+      </ul>
+      <li class="nav-item">
+          <i class="fa fa-calendar" style="color:rgb(65, 153, 144)"></i>      
+          <span id="date_time" style="font-size: 18px; color: white;"></span>
+          <span id="hour" style="font-size: 18px; color: white;"></span>
+      </li>
+    </div>
+  </nav>
+
+  <!--   FIN DE NAVBAR   -->
+
+  <!-- NAVBAR ANTIGUA
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'dash' %}" style="color: white;margin-right:20px;"><img src="{% static 'logo.png'%}" width="50" style="margin-right:20px; margin-top: -10px;" >Portal Admin </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle "style="color: white;"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rutas</a>
+          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href='{%  url "planificar" %}'>Planificacion</a>
+            <a class="dropdown-item" href='{% url "lista_rutas" %}'>Ver rutas</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'listusuarios' %}" style="color: white;">Usuarios</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle "style="color: white;"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pacientes</a>
+          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{%  url 'listtutor' %}">Tutores</a>
+            <a class="dropdown-item" href="{%url 'listpaciente' %}">Actuales</a>
+            <a class="dropdown-item" href="{% url 'reingreso' %}">Antiguos<span class="sr-only">(current)</span></a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'listenfermero' %}" style="color: white;">Especialistas</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle "style="color: white;"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Visitas</a>
+          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href='{%  url "agendar_lista" %}'>Visitas</a>
+            <a class="dropdown-item" href='{%  url "agendar_lista_hoy" %}'>Asignacion</a>
+            <a class="dropdown-item" href="{% url 'tiempos'%}">Tiempo</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'listar-equipo'%}"  style="color: white;" class="nav-link">Equipos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'perfil_admin' %}" style="color: white;">Perfil<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'biblioteca'%}"  style="color: white;" class="nav-link">Bibliotecas</a>
+        </li>
+        <li class="nav-item" >
+          <a href="{% url 'listconsulta'%}"  style="color: white;" class="nav-link">Contacto <span  style="visibility: hidden; z-index: 100;" class="badge  badge-pill badge-danger" id="Consulta"></span></a>      
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="margin-left: 62%; position: absolute;">
+        <li class="nav-item">
+          <a  id="logout" href="{% url 'logout'%}"  style="color: white; " class="nav-link">Logout ({{ user }}) </a>
+        </li>
+        <li class="nav-item" style="margin-top: 5px; color: white; list-style-type: none;">
+          <div class="row-inline" >
+            <i class="fa fa-calendar fa-fw w3-margin-right" style="color: white;"></i>      
+            <span id="date_time" style="font-size: 18px;"></span>
+            <span id="hour" style="font-size: 18px;" ></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  -->
+
+<div class="container" >
+  {%block content%}
+  {%endblock%}
+</div>
+
+
+
+<!--botstrap js jquery-->
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+<script>
+  window.onload=Consulta();
+  function Consulta(){
+    fetch('http://localhost:8000/dashboard/data/consulta')
+    .then(res => res.json())
+    .then(data => {
+      consulta=document.getElementById("Consulta");
+      consulta.innerHTML=data.consulta;  
+    
+      if (data.consulta == "0"){
+        consulta.style.visibility="hidden";
+      }
+      else{
+        consulta.style.visibility="visible";
+      } 
+    })
+    setTimeout(Consulta,60000)
+  };
+ window.onload = date_time('date_time');
+  function date_time(id){
+    date = new Date;
+    year = date.getFullYear();
+    month = date.getMonth();
+    months = new Array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Deciembre');
+    d = date.getDate();
+    day = date.getDay();
+    days = new Array('Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado');
+    h = date.getHours();
+    if(h < 10){
+      h = "0"+h;
+    }
+    m = date.getMinutes();
+    if(m < 10){
+      m = "0"+m;
+    }
+    s = date.getSeconds();
+    if(s < 10){
+      s = "0"+s;
+    }
+    result = ' '+d+' de '+months[month]+'  '+year+', ';
+    document.getElementById(id).innerHTML = result;
+    setTimeout('date_time("'+id+'");','1000');
+    return true;
+  }
+  window.onload = hour('hour');
+  function hour(id){
+    h = date.getHours();
+    if(h < 10){
+      h = "0"+h;
+    }
+    m = date.getMinutes();
+    if(m < 10){
+      m = "0"+m;
+    }
+    s = date.getSeconds();
+    if(s < 10){
+      s = "0"+s;
+    }
+    result = h+':'+m;
+    document.getElementById(id).innerHTML = result;
+    setTimeout('hour("'+id+'");','1000');
+    return true;      
+  }
+</script>
+</body>
+<script>
+  $(function () {
+      $('[data-toggle="popover"]').popover()
+  })
+</script>
+
+</html>

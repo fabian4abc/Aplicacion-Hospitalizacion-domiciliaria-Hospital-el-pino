@@ -1,0 +1,230 @@
+<!--DOCTYPE html -->
+{%extends "base.html"%}
+
+
+<title> {%block head_title %} Hora | {{block.super}} {%endblock head_title%} </title>	
+
+
+{%  block content %}
+
+<style>
+.table a.table-link.danger {
+    color: #e74c3c;
+}
+.label {
+    border-radius: 3px;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+.user-list tbody td .user-subhead {
+    font-size: 0.875em;
+    font-style: italic;
+}
+.user-list tbody td .user-link {
+    display: block;
+    font-size: 1.25em;
+    padding-top: 3px;
+    margin-left: 60px;
+}
+a {
+    color: #3498db;
+    outline: none!important;
+}
+.user-list tbody td>img {
+    position: relative;
+    max-width: 50px;
+    float: left;
+    margin-right: 15px;
+}
+
+.table thead tr th {
+    text-transform: uppercase;
+    font-size: 0.875em;
+}
+.table thead tr th {
+    border-bottom: 2px solid #e7ebee;
+}
+.table tbody tr td:first-child {
+    font-size: 1.125em;
+    font-weight: 300;
+}
+.table tbody tr td {
+    font-size: 0.875em;
+    vertical-align: middle;
+    border-top: 1px solid #e7ebee;
+    padding: 12px 8px;
+}
+
+ 
+
+
+</style>
+
+<br>
+
+<h1>Visitas: {{obj.nombre}} {{obj.apellido1}} {{obj.apellido2}} </h1></br>
+<hr style="background-color:lightblue; width: 550px; margin-left: -10px;margin-top:-20px; height: 3px;">
+
+
+
+
+
+<!-- Metodo Buscar -->
+
+
+<!-- FIN -->
+
+
+<div class="row row-cols-3" style="margin-top: 20px;">
+       
+    <div class="col-sm-6">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list" >
+                            <thead>
+                                <tr>    
+                                <th><span>Fecha</span></th>
+                                <th><span>Estado</span></th>
+                                <th><span>Opciones</span></th>
+                                <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            	{% for fecha in date_list %}
+
+                                   {%if fecha.id_paciente == obj.id%}
+
+                                        {%if fecha.episodio == obj.episodio%}  
+
+                                {%if fecha.status == 0%}
+                                <tr>
+                                    <td style="width: 30%">
+                                        <a >{{fecha.fecha}}</a>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        {% if fecha.status == 0 %}
+                                            <span class="label label-default">Pendiente</span>
+                                        {%endif%}
+                                        {% if fecha.status == 1 %}
+                                            <span class="label label-success">Realizada</span>
+                                        {%endif%}                                        
+                                    </td>                            
+                                    <td style="width: 50%">
+        						      <a href='{%  url "update_fecha" id=fecha.id id_paciente=obj.id %}' class="btn btn-info"> Modificar </a>
+        						      <a href='{%  url "borrar_fecha" id=fecha.id %}' class="btn btn-danger"> Borrar </a>
+
+
+                                    </td>
+                                </tr>
+                                        {%endif%}
+                                        {%endif%}
+
+                                        {%endif%}
+								        {% endfor %}
+
+
+                                {% for fecha in date_list %}
+
+
+                                    {%if fecha.id_paciente == obj.id%}  
+
+                                        {%if fecha.episodio == obj.episodio%} 
+
+                                {%if fecha.status == 1%}
+                                <tr>
+
+                                    <td style="width: 30%;">
+                                        <a >{{fecha.fecha}}</a>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        {% if fecha.status == 0 %}
+                                            <span class="label label-default">Pendiente</span>
+                                        {%endif%}
+                                        {% if fecha.status == 1 %}
+                                            <span class="label label-success">Realizada</span>
+                                        {%endif%}                                        
+                                    </td>                            
+                                    <td style="width: 55%;">
+                                      <a href='{%  url "visita_detalles" id=fecha.id  %}' class="btn btn-info"> Ver detalle </a>
+                                     
+
+
+                                    </td>
+
+                                        
+                                </tr>
+
+                                {%endif%}
+                                {%endif%}
+                                {%endif%}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <a href='{%  url "agendar_visita" id=obj.id %}' class="btn btn-info"> Agendar Hora</a>
+            <a href= '{%  url "listpaciente" %}' type="button" class="btn btn-info"> Volver </a>
+        
+
+        </div>
+
+
+        <div class="col-sm-3" style=" margin-left: 0px; border:solid 1px #E7EBEE; ">
+
+            <h1>Tutor</h1>
+            <h2>  {{usr.first_name}} {{usr.last_name}}  </h2>
+            <span class="list"> - CONTACTO:</span> </br>  
+            
+            <ul class="list_box">
+                
+                <li>
+    
+                    <label>
+                        
+                                         
+                        <span class="small-list"> Email: {{usr.email}} </span> </br> 
+                        <span class="small-list"> Domicilio: {{tx.domicilio}} {{tx.num_domicilio}}, {{tx.comuna}} </span> </br> 
+                        <span class="small-list"> Telefono: +56 {{tel.tel}} </span> </br>  
+    
+    
+                    </label>
+
+
+
+               
+                </li>
+
+
+                
+            </ul>
+
+            <span class="list"> - EPISODIO: {{obj.episodio}} </span> </br></br>
+            
+        </div>
+
+
+</div>
+        
+          
+
+
+    
+   
+
+ 
+
+
+
+
+
+
+
+{%  endblock content %}
+
+

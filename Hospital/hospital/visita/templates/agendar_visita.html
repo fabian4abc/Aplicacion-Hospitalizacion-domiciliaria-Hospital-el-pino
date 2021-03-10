@@ -1,0 +1,67 @@
+<!--DOCTYPE html -->
+{%extends "base.html"%}
+
+
+<title> {%block head_title %} Hora | {{block.super}} {%endblock head_title%} </title>	
+
+{%  block content %}
+
+<style>
+
+	input[type=text] {
+  		border: 2px solid lightblue;
+  		border-radius: 4px;
+}
+
+	input[type=date] {
+  		border: 2px solid lightblue;
+  		border-radius: 4px;
+  		height: 8%
+}  
+
+
+
+</style>
+
+
+<h1>Agendar Hora</h1>
+
+<h2><label> {{px.nombre}} {{px.apellido1}} {{px.apellido2}} </label></h2>
+
+</br>
+
+
+
+<form method='POST' action='' class="col-sm-5">
+	{%  csrf_token %}
+
+
+<p>
+<label for="fecha"> Fecha Visita</label></br>
+<input type="date" name="fecha"  id="fecha" class="form-control">
+</p>
+
+<label for="periosidad">Periosidad visitas:</label>
+<select name="periosidad" id="periosidad" class="form-control" >
+	<option value="0">1 día</option>
+	<option value="2vdAMPM">2 veces al día AM-PM</option>
+	<option value="2vsSA">2 veces a la semana Saltados</option>
+	<option value="2vsSE">2 veces a la semana Seguidos</option>
+	<option value="3vsSA">3 veces a la semana Saltados</option>
+	<option value="3vsSE">3 veces a la semana Seguidos</option>
+	
+
+</select>
+<div class="wrap-input100 rs1 validate-input">
+	</br>
+	<input type="hidden" name="id_paciente"  id="id_paciente" value="{{px.id}}" readonly>
+	<span class="focus-input100"></span>
+</div>
+</p>
+
+
+<input type="submit" value="Crear Visita" class="btn btn-info"/>
+</form>
+
+{%  endblock content %}
+

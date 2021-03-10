@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>Datos de Contacto: <h1>
+
+	<hr style="background-color:lightblue; width: 320px; margin-left: 0px; height: 3px;">
+
+<div class="col-sm-5">
+	<form method="POST">
+	{% csrf_token%}
+
+	<div>
+		<label for="tel">Telefono Contacto con UHD:</label>
+		<input type="text"class="form-control" placeholder="+56" name="tel" id="tel">
+
+	</div>
+	<br>
+	<div>
+		<label for="correo">Correo:</label>
+		<input type="email" class="form-control" name="correo" id="correo"  placeholder="Ingrese correo de contacto con UHD">
+	</div><br>
+	<div>
+		<label for="texto_explicativo">Texto Explicatvo:</label>
+		<input type="textarea" class="form-control" name="texto_explicativo" id="texto_explicativo" value="Para contactarse con la unidad puede mandarnos un correo o llamarnos al número presentado">
+	</div><br><br>
+	
+	
+	<button  class="btn btn-info" type="submit">guardar</button>
+	
+</form>
+</div>
+
+
+{% endblock %}

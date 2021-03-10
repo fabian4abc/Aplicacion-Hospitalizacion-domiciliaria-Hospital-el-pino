@@ -1,0 +1,205 @@
+<!--DOCTYPE html -->
+{%extends "base.html"%}
+{%  block content %}
+
+
+
+
+<style>
+    .table a.table-link.danger {
+    color: #e74c3c;
+}
+.label {
+    border-radius: 3px;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+.user-list tbody td .user-subhead {
+    font-size: 0.875em;
+    font-style: italic;
+}
+.user-list tbody td .user-link {
+    display: block;
+    font-size: 1.25em;
+    padding-top: 3px;
+    margin-left: 60px;
+}
+a {
+    color: #3498db;
+    outline: none!important;
+}
+.user-list tbody td>img {
+    position: relative;
+    max-width: 50px;
+    float: left;
+    margin-right: 15px;
+}
+
+.table thead tr th {
+    text-transform: uppercase;
+    font-size: 0.875em;
+}
+.table thead tr th {
+    border-bottom: 2px solid #e7ebee;
+}
+.table tbody tr td:first-child {
+    font-size: 1.125em;
+    font-weight: 300;
+}
+.table tbody tr td {
+    font-size: 0.875em;
+    vertical-align: middle;
+    border-top: 1px solid #e7ebee;
+    padding: 12px 8px;
+}
+</style>
+
+<h1>Lista de Consultas</h1>
+
+
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>Titulo</span></th>
+                                <th><span>Fecha Enviada</span></th>
+                                <th><span>Usuario</span></th>
+                                <th><span>Estado</span></th>
+                                <th><span>Opciones</span></th>
+                                <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+
+                            	{% for obj in con %}
+                            	
+
+                                {% if obj.estado == 0 %}
+
+
+                                <tr>
+                                   	
+                                        {% for u in usr %}
+
+                                            {% if u.id == obj.id_usuario %}
+
+                                            <td>                                      
+                                                  <span class="user-subhead"> {{obj.titulo}} </span>
+                                            </td>
+                                            <td>{{obj.timestamp}}</td>
+
+                                            <td>{{u.first_name}} {{u.last_name}} </td> 
+
+
+                                            <td> 
+
+                                            {% if obj.estado == 0 %}
+                                                <span class="badge badge-dark">Pendiente</span>
+                                            {%endif%}
+                                       
+                                            {% if obj.estado == 1 %}
+                                                <span class="badge badge-success">Resuelta</span>
+                                            {%endif%} 
+
+                                            </td>
+
+                                            <td style="width: 26%;">
+                                     
+                                                {% if obj.estado == 0 %}
+                                    
+                                                    <a href='{%  url "consulta_edit" id=obj.id %}' class="btn btn-warning">Resolver </a>
+
+                                                {% endif %}       
+        
+                                            </td>
+
+                                            {% endif %} 
+                                    
+                                        {% endfor %}
+
+                                    	
+                                </tr>
+
+										{% endif %}
+										{% endfor %}
+
+                                {% for obj in con %}
+                                
+
+                                {% if obj.estado == 1 %}
+
+
+                                <tr>
+                                    
+
+
+                                        {% for u in usr %}
+
+                                            {% if u.id == obj.id_usuario %}
+
+                                            <td>                                      
+                                                <span class="user-subhead"> {{obj.titulo}} </span>
+                                            </td>
+                                            <td>{{obj.timestamp}}</td>
+
+                                            <td> {{u.first_name}} {{u.last_name}} </td> 
+
+
+                                            <td> 
+
+                                            {% if obj.estado == 0 %}
+                                                <span class="badge badge-dark">Pendiente</span>
+                                             {%endif%}
+                                   
+                                            {% if obj.estado == 1 %}
+                                                <span class="badge badge-success">Resuelta</span>
+                                            {%endif%} 
+
+                                            </td>
+
+                                            <td style="width: 26%;">
+                                     
+                                            {% if obj.estado == 1 %}
+                                    
+                                                <a href='{%  url "consulta_detalle_adm" id=obj.id %}' class="btn btn-success"> Ver resolución </a>
+
+                                            {% endif %}       
+        
+                                            </td>
+
+                                            {% endif %} 
+                                    
+                                        {% endfor %}
+
+
+
+                                        
+                                </tr>
+
+                                        {% endif %}
+                                        {% endfor %}
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+{%  endblock content %}
+

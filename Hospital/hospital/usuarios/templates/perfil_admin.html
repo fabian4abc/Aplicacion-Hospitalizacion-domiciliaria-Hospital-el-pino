@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<style type="text/css">
+	
+	table{
+		width: 300px;
+		height: 100px;
+		
+	}
+
+	th{
+		min-width:280px; 
+		font-size: 20px;
+
+	}
+	td{
+		min-width:280px; 
+		
+
+	}
+
+
+	a:link{
+		text-decoration: none;
+
+	}
+
+</style>
+
+<div class="row">
+
+	
+	<div class="col-sm-6"> 
+		<br>
+
+	
+		<table>
+			<thead>
+				<h1>Perfil Administrador:<h1><hr style="background-color:lightblue; width: 360px; margin-left: 0px; height: 3px;"></h1>
+
+			</thead>
+			<tbody>
+				<tr>
+					<th>Username:</th>
+					<td> {{user.username}} </td>
+				</tr>
+				<tr>
+					<th>Nombre Completo: </th>
+					<td>{{user.first_name}} {{user.last_name}}</td>
+				</tr>
+				<tr>
+					<th>Correo Electronico:</th>
+					<td>{{user.email}}</td>
+				</tr>
+				<tr>
+					<th>Telefono:</th>
+					<td>{{perfil.tel}}</td>
+				</tr>
+				
+			</tbody>
+
+		</table><br>
+		<a href="{%url 'contra_perfil_edit'%}" class="btn btn-info btn-block">Cambiar Clave</a>
+
+
+
+<!-- Fin primera query -->
+
+{%if cont == 0 %}
+
+	<div class="col-sm-6"> 
+		<br>
+
+	
+		<table>
+			<thead>
+				<h1>Datos Reagendar:<h1><hr style="background-color:lightblue; width: 360px; margin-left: 0px; height: 3px;"></h1>
+
+		<a href="{%url 'contacto'%}" class="btn btn-info btn-block">Ingresar Datos</a>
+
+
+{%else%}
+
+	<div class="col-sm-6"> 
+		<br>
+
+	
+		<table>
+			<thead>
+				<h1>Datos Reagendar:<h1><hr style="background-color:lightblue; width: 360px; margin-left: 0px; height: 3px;"></h1>
+
+			</thead>
+			<tbody>
+				<tr>
+					<th>Telefono:</th>
+					<td> {{q.tel}} </td>
+				</tr>
+				<tr>
+					<th>Correo Electronico: </th>
+					<td>{{q.correo}}</td>
+				</tr>
+				<tr>
+					<th>Texto Explicativo:</th>
+					<td>{{q.texto_explicativo}}</td>
+				</tr>
+				
+			</tbody>
+
+		</table><br>
+		<a href="{% url 'contacto_edit'%}" class="btn btn-info btn-block">Editar Datos</a>
+
+{%endif%}
+
+</div>
+
+
+
+
+{%endblock%}

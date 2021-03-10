@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta content="telephone=no" name="format-detection">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+	
+
+	<title> HOME</title>
+	
+</head>
+<body>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+			font-family:'Poppins',sans-serif; 
+		}
+
+		body{
+			background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0)), url('../static/d.jpg');
+			height: 100vh;
+			-webkit-background-size:cover;
+			background-size: cover;
+			background-position: center center;
+			position: relative;
+			backdrop-filter: blur(6px);
+		}
+
+		.logo img{
+			float:left;
+			width:90px;
+		}
+
+		.title{
+  			 margin-top: 10px;
+		     text-transform: uppercase;
+			 color: red; 
+		  	 margin-left: 100px;
+		     font-size: 45px;
+		  	 position: absolute;
+
+		}
+		.title span{
+ 	 		 display: inline-flex;
+  
+		}
+
+		.title span:nth-child(even){
+			  font-size: 10px;
+			  overflow: hidden;
+			  transition: ease-in-out 0.5s;
+			  border-bottom: 2px solid green;
+			  text-transform: lowercase;
+			  color: white;
+			  letter-spacing: -1em;
+			}
+
+		.title:hover span:nth-child(even){
+			  letter-spacing: 0;
+			}
+
+		.titulo{
+			position: absolute;
+			top:50%;
+			left:50%;
+			transform: translate(-50%,-50%);
+		}
+		.titulo h1{
+			font-size: 60px;
+			color: white;
+		}
+		
+		.btn-custom{
+			background:rgb(3, 116, 110);
+			border-color: rgb(3, 116, 110);
+			color:#fff;
+			font-weight:600;
+			font-size: large;
+			min-height: 48px;
+		
+		}
+		.btn-custom:focus,.btn-custom:hover,.btn-custom:active,.btn-custom:active:focus{
+			background: rgb(3, 116, 110);
+			border-color: rgb(3, 116, 110);
+			color:#fff;
+		}
+		.btn-custom:focus{
+			box-shadow: 0 0 0 0.2rem rgba(61, 190, 179, 0.25);
+		}
+			
+	</style>
+	 	<div class="navbar">
+	 		<div class="logo">
+	 			<img src="{% static 'logo.png'%}">	 		
+	 		</div>
+	 		<div class="title">
+                <span>U</span><span>nidad</span>
+                <span>H</span><span>ospitalización</span>
+                <span>D</span><span>omiciliaria</span>     
+	 		</div>
+	 	</div>
+		 	<div class="titulo">
+				<h1>Bienvenidos</h1>
+				<a href="{%url 'login'%}" class="btn mt-5 btn-custom btn-block text_uppercase rounded-pill "> Login </a>
+			 </div>
+</body>
+</html>

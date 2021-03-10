@@ -1,0 +1,202 @@
+<!--DOCTYPE html -->
+{%extends "base_especialista.html"%}
+{% load static %}
+
+{%block head_title%}
+  Perfil
+{%endblock head_title%}
+
+{%  block content %}
+
+<div class="container" style="width: 90%; margin-top: 20px;">
+  
+  <div class="row">
+    <div class="card col-sm-6" style="max-width: 540px; ">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          {% if personal.file %}
+          <img src="../..{{personal.file.url}}" style="width: 99%; margin-top: 20px;">
+          {% endif %}
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h2 class="card-title">{{actual.first_name}} {{actual.last_name}}</h2>
+            <p class="card-text"> <span class="emph-1">Especialidad</span>:
+              {{personal.especialidad}}</<span><br>
+                <span class="emph-1">E-Mail</span> : {{actual.email}} <br>
+                <span class="emph-1">Rut</span> : {{personal.rut}} <br>
+                <span class="emph-1">N. Telefónico</span> : +56 9{{tel}} 
+              </p>
+             <a href="{% url 'Especialista_edit' perfil=actual.id id_personal=personal.id %}" class="btn btn-info btn-lg btn-block" role="button">Editar</a>
+             <a  href="{%url 'Contra_edit' %}" class="btn btn-info btn-lg btn-block" role="button">Cambiar contraseña</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1" style="margin-bottom: 40px;"></div>
+    <div class="card col-sm-5" style="margin-bottom: 40px;">
+      <h4 class="card-header">Equipo {{name_group}}</h4>
+      <div class="card-body">
+        <h5 class="card-title">Personal:</h5>
+        {% for g in users_group %}
+        <p class="card-text">
+         
+          {{g.first_name}} {{g.last_name}}
+         
+         
+        </p>
+        {% endfor %}
+       
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--
+ 
+  
+  <div class="container">
+    
+      
+      
+    
+
+    
+    
+        
+     
+      <div class="col-md-9 right-content pd-r0 pd-l0">
+
+           
+          <section id="about" class="bg-white t-center">
+            
+         
+            <div class="about">
+                  
+      
+            <div class="content">
+              
+          
+              <div class="block-content mb-100">
+                
+                  <div class="row">
+
+                  <div class="col-md-12  ">
+                
+                <div class="main-title profile">
+                                  <h1 class="mb-20"><b> {{actual.first_name}} {{actual.last_name}} </b> </h1>
+                                  <a href="{% url 'Especialista_edit' perfil=actual.id id_personal=personal.id %}" class="button" role="button">Editar</a>
+
+
+                              </div>
+                   </div>
+                
+              
+
+              </div>
+          
+                <div class="block-content mb-100  pb-30">
+
+                  <div class="col-md-8 col-md-offset-3  col-sm-8 col-sm-offset-3 ">
+
+                  
+                  <div class="listing mt-40">                                    
+                  <div class="listing-inner">
+                  <div class="listing-event">
+                    <ul class="data left">
+                      <li><span class="emph-1">Especialidad</span> :<br>
+                      {{personal.especialidad}}</li>
+                    </ul>
+
+                    <ul class="data right">
+                      <li><span class="emph-1">E-Mail</span> : {{actual.email}} </li>
+                      <li><span class="emph-1">Rut</span> : {{personal.rut}} </li>
+                      <li><span class="emph-1">Phone</span> : +56 9{{tel}} </li>
+                    </ul>
+
+                  </div>
+                  </div>
+
+                  </div>
+                 
+
+                </div>
+
+                
+         
+
+                </div>
+            
+                  <div class="block-content mb-100 pb-30">
+
+                        
+
+                      <div class="col-md-12  ">
+
+                        <div class="sub-title mb-40">
+                                          <h2 class="uppercase">Team {{name_group}}</h2>
+                                      </div>
+
+                       </div>
+                      
+                 
+      
+      
+                    
+                    <div class="col-md-8 col-md-offset-3  col-sm-8 col-sm-offset-3 ">
+                                        
+                
+                    <div class="listing mt-40">
+                      
+                    <div class="listing-inner">
+                    <div class="listing-event">
+                      <ul class="data left">
+                        {% for g in users_group %}
+                        <li class="emph-1">{{g.first_name}}{{g.last_name}} </li>
+                       
+                        {% endfor %}
+                        
+                      </ul>                  
+                    </div>
+                    </div>
+                    
+                    </div>
+                 
+                                        
+                  </div>
+                  
+                  </div>
+
+                
+
+               
+                <div class="block-content mb-100">
+
+                
+                      
+
+                    <div class="col-md-12  ">
+
+                      <div class="sub-title mb-40">
+                                         
+                                    </div>
+
+                     </div>
+                     
+                   
+                  
+                </br>
+                </br>
+                </div>
+                  -->              
+                
+                             
+
+
+
+
+
+{%  endblock content %}
+

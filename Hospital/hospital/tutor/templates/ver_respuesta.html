@@ -1,0 +1,24 @@
+<!--DOCTYPE html -->
+{%  extends "base_tutor.html" %}
+
+<title> {%block head_title %} {{usr.first_name}} {{usr.last_name}} | {{block.super}} {%endblock head_title%} </title>
+
+
+{%block content%}
+
+<div class="card text-center">
+  <div class="card-header">
+    <h1>Consulta Resuelta </h1>
+  </div>
+  <div class="card-body">
+    <h2 class="card-title"><b> <u>{{con.titulo}}</u></b></h2> </br>
+    <h3 class="card-title"><b>Mensaje</b> </br></br>  {{ con.mensaje }}</h3> </br>
+    <h3 class="card-title"><b>Resolución</b></br></br> {{ con.respuesta }}</h3></br>
+
+    <p class="card-text">{{ con.timestamp }}</p>
+             
+    <a href='{% url "consulta_t" %}' class="btn btn-danger" role="button">Volver</a>
+
+
+{%endblock content%}
+

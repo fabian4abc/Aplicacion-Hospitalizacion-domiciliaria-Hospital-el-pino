@@ -1,0 +1,25 @@
+SUPER USUARIO:		        
+		                             
+nombre: 		superuser         
+contraseña:	123321
+
+_____________________________________ 
+
+ADMINISTRADOR:
+
+nombre: 		administrador         
+contraseña:	admadm1233
+
+____________________________________
+
+MEDICO:
+
+nombre: 		Foreman         
+contraseña:	erifor9745
+
+___________________________________
+
+TUTOR:
+
+nombre: 		IronMaiden
+contraseña:	brudic9784

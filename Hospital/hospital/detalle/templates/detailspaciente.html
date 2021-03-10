@@ -1,0 +1,31 @@
+<!--DOCTYPE html -->
+{%  extends "base.html" %}
+
+<title> {%block head_title %} {{paciente.nombre}} {{paciente.apellido1}} {{paciente.apellido2}} | {{block.super}} {%endblock head_title%} </title>
+
+
+{%block content%}
+
+<div class="card text-center">
+  <div class="card-header">
+    <h1>{{paciente.nombre}} {{paciente.apellido1}} {{paciente.apellido2}} </h1>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ paciente.rut}}</h5>
+
+    <p class="card-text">Domicilio: {{ paciente.domicilio }}</p>
+    <p class="card-text">Comuna: {{ paciente.comuna }}</p>
+    <p class="card-text">Fecha de Nacimiento: {{ paciente.f_nacimiento}}</p>
+    
+    
+    <a href='{% url "borrar_paciente" id=paciente.id %}' class="btn btn-danger" role="button">Eliminar</a>
+    <a href='{% url "baja" id=paciente.id %}' class="btn btn-warning" role="button">Dar de baja</a>
+    <a href='{%  url "tutor_detalle" id=tutor.id_perfil_id %}' class="btn btn-success" role="button">Tutor</a></br></br>
+    <a href='{% url "ver_registro_adm" id=paciente.id %}' class="btn btn-info" role="button">Ver Episodios</a>
+    <a href="{% url 'paciente_edit' id_tutor=paciente.id_tutor_id id_paciente=paciente.id %}" class="btn btn-info" role="button">Edit</a>
+    <a href='{%  url "listpaciente"%}' class="btn btn-info" role="button">Volver</a>
+    
+
+
+{%endblock content%}
+

@@ -1,0 +1,95 @@
+{%extends "base.html"%}
+
+{%  block content %}
+
+
+<style type="text/css">
+	
+h1{
+	
+	font-size: 45px;
+	
+}
+
+span{
+	
+	font-size:30px; 
+
+}
+
+label{
+	font-size: 25px;
+	
+}
+
+label > span{
+	font-size: 20px;
+}
+
+.contenedor{
+	background: white;
+	width: 500px;
+	border-radius: 3px;
+}
+
+
+
+</style>
+
+<div>
+	<h1>R<span>egistro</span> </h1>
+
+</div>	
+
+<div class="contenedor">
+
+	<form method="POST" class="row">
+		{% csrf_token%}
+
+		
+		
+		<div class="col-sm-12">
+			<div style="padding: 10px">
+			<label>N<span>ombre</span> <span>de</span> U<span>suario:</span></label> {{a}} <br>
+			<input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username" class="form-control">
+			</div>	
+			{% if messages %}
+			{%for message in messages %}
+			
+			<div class="alert alert-danger">{{message}}</div>
+
+			{%endfor%}
+			{%endif%}
+		
+			<div style="padding: 10px">
+				<label>N<span>ombre:</span></label><br>
+				<input type="text" name="first_name" maxlength="140" required="" id="id_first_name" class="form-control">
+			</div>
+			<div style="padding: 10px">
+				<label>A<span>pellidos:</span></label><br>
+				<input type="text" name="last_name" maxlength="140" id="id_last_name" class="form-control">
+			</div>
+
+			<div style="padding: 10px">
+				<label>C<span>orreo</span> E<span>lectronico:</span></label><br>
+				<input type="email" name="email" required="" id="id_email" class="form-control">
+			</div>
+			
+			<div style="padding: 10px">
+				<label for="password1"></label><br>
+				<input type="hidden" name="password1" id="password1" value="Asd123qaz">
+			</div>
+			<div style="padding: 10 0 0px">
+				<label for="password2"></label><br>
+				<input type="hidden" name="password2" id="password2" value="Asd123qaz">
+			</div>
+			<div style="padding:0 0 10 10px">
+				<button class="btn btn-info" type="submit">Registrar</button>
+		
+			</div>
+		</div>
+			
+	</form>
+
+</div>
+{% endblock %} 

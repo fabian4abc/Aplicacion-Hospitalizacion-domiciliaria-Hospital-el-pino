@@ -1,0 +1,62 @@
+<!--DOCTYPE html -->
+{%  extends "base_tutor.html" %}
+
+<title> {%block head_title %} {{paciente.nombre}} {{paciente.apellido1}} {{paciente.apellido2}} | {{block.super}} {%endblock head_title%} </title>
+
+
+{%block content%}
+
+
+<div class="card text-center">
+  <div class="card-header">
+    <h1>{{paciente.nombre}} {{paciente.apellido1}} {{paciente.apellido2}} </h1>
+    <h2 class="card-title"> Episodio {{aux}}</h2></br></br>
+  </div>
+  <div class="card-body ">
+    <div class="row"style=" margin-left: 20px; ">
+         {% for f in formulario%}
+              
+
+                {%if f.id_paciente == paciente.id%}
+
+                  {% if f.episodio == aux %}
+          
+                 <div class="card" style="margin-right: 5px;">
+                    <div class="card-header">
+                      Visita {{f.id_visita}}
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">Fecha Visita</h5>
+                      {%for v in visita%}
+                     {%if v.id == f.id_visita%}
+                        <p class="card-text">{{v.fecha}}</p>   
+                     {%endif%}
+                     {% endfor %}
+                     
+                      <a href="{% url 'tutor_historial' id_visita=f.id_visita %}" class="btn btn-danger">Detalle Visita</a>
+                    </div>
+                  </div>
+
+                  
+                 
+                  {% endif %}
+
+                {% endif %}
+                
+                 
+              {% endfor %}
+           
+
+    </div>
+    
+              
+           
+               
+
+    </br></br></br>
+    <a href='{% url "ver_registro_tutor" id=paciente.id %}' class="btn btn-danger" role="button">Volver</a>
+    
+
+
+{%endblock content%}
+

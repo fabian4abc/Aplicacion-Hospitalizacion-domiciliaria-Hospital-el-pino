@@ -1,0 +1,85 @@
+{% load static %}
+<head>
+    <title> {%block head_title%} Hospital El Pino {%endblock head_title%} </title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/651f03e613.js" crossorigin="anonymous"></script>
+</head>
+
+
+<style>
+    .aligncenter {
+        text-align: center;
+    }
+</style>    
+
+{% if sb %}
+
+<div class="jumbotron">
+    <div class = "aligncenter">
+        <h5 class="display-4">Ruta - Equipo San Bernardo</h5>
+        <p class="lead">Orden de visitas: {{sb.ruta}}</hr> Distancia estimada: {{sb.distancia}}KMS </p>
+    </div>
+    <hr class="my-4">
+    <p class="aligncenter">
+    <img src={{mapa_sb}}>
+    </p>
+    <p class="lead">
+        <p class="aligncenter">
+        <a class="btn btn-primary btn-lg" href={{sb.link}} target="_blank" role="button">Ver Ruta</a>
+        </p>
+    </p>
+</div>
+
+{% endif %}
+
+{% if eb %}
+
+<div class="jumbotron">
+    <div class="aligncenter">
+        <h5 class="display-4">Ruta - Equipo El Bosque</h5>
+        <p class="lead">Orden de visitas: {{eb.ruta}}</hr> Distancia estimada: {{eb.distancia}}KMS </p>
+    </div>
+    <hr class="my-4">
+    <p class="aligncenter">
+    <img src={{mapa_eb}}>
+    </p>
+    <p class="lead">
+        
+        <p class="aligncenter">
+        <a class="btn btn-primary btn-lg" href={{eb.link}} target="_blank" role="button">Ver Ruta</a>
+        </p>
+    </p>
+</div>
+
+{% endif %}
+
+{% if lp %}
+
+<div class="jumbotron">
+    <div class = "aligncenter">
+        <h5 class="display-4">Ruta - Equipo La Pintana</h5>
+        <p class="lead">Orden de visitas: {{lp.ruta}}</hr> Distancia estimada: {{lp.distancia}}KMS </p>
+    </div>
+    <hr class="my-4">
+    <p class="aligncenter">
+    <img src={{mapa_lp}}>
+    </p>
+    <p class="lead">
+        <p class="aligncenter">
+        <a class="btn btn-primary btn-lg" href={{lp.link}} target="_blank" role="button">Ver Ruta</a>
+        </p>
+    </p>
+</div>
+
+{% endif %}
+
+<hr class="my-4">
+<div class = "aligncenter">
+    <a class="nav-link" href="{% url 'dash' %}">
+        <i class="fa fa-backward fa-2x" style="color:rgb(65, 153, 144)"></i>
+        <h4>
+            <b style="color:black">Regresar</b>
+        </h4>
+      </a>
+</div>

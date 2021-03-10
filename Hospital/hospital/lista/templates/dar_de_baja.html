@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<form  method="POST">
+	{% csrf_token%}
+	<h1>Dar de Baja Paciente</h1><br>
+	<hr style="background-color:lightblue; width: 320px; margin-left: 0px;margin-top:-20px; height: 3px;"><br>
+
+
+
+	<div class="card mb-3" style="max-width: 540px;">
+		<div class="row no-gutters">
+		  <div class="col-md-4">
+			<img src="{%static 'user.png'%}"style="width: 100%; margin-top:40px;">
+		  </div>
+		  <div class="col-md-8">
+			<div class="card-body">
+			  <h5 class="card-title">{{paciente.nombre}} {{paciente.apellido1}} {{paciente.apellido2}}</h5>
+			  <p class="card-text">{{paciente.rut}} <br><h6 class="slert alert-warning" style="max-width: 580px;" >PRECAUCIÓN!! <br>Al dar de baja a un paciente se van a deshabilitaran ciertas opciones de visitas y modificación de información</h5>
+
+            <p class="card-text" style="margin-bottom: 0px;"><small class="text-muted"> <h4 class="card-title">Visitas Pendientes: {{cont}} </h4>                
+
+              <p class="card-text" style="margin-bottom: 0px;"><small class="text-muted"> <h3 class="card-title">¿Desea Dar de Baja al Paciente?</h3>
+                           
+             
+                <div >
+                    
+                <button class="btn btn-danger" type="submit">Dar de Baja</button>
+                <a href='{%  url "paciente_detalle" id=paciente.id %}' class="btn btn-info">Volver</a>
+                </div>
+       
+			</div>
+		  </div>
+		</div>
+	 </div>
+
+
+	</form>  
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+<!--DOCTYPE html -->
+{%  extends "base.html" %}
+
+<title> {%block head_title %} {{paciente.nombre}} {{paciente.apellido1}} {{paciente.apellido2}} | {{block.super}} {%endblock head_title%} </title>
+
+
+{%block content%}
+
+<div class="card text-center">
+  <div class="card-header">
+    <h1> Asignación de tipo de paciente </h1>
+  </div>
+  <div class="card-body">
+
+    <form method="POST">
+    {% csrf_token%} 
+
+
+  <select id="tipo" name="tipo" >
+  
+    {%for i in lista%}
+
+    <option value="{{i.item}}">{{i.item}} ({{i.tiempo}} minutos) </option>
+
+    {%endfor%}
+  
+  </select>
+
+    <button class="btn btn-info" type="submit">Guardar</button>
+    </form>  
+
+    
+    
+    </br></br>
+    <a href='{%  url "listpaciente"%}' class="btn btn-info" role="button">Volver</a>
+    
+
+
+{%endblock content%}
+

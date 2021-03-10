@@ -1,0 +1,97 @@
+{% extends "base.html"%}
+
+
+{% block content%}
+
+
+<div class="row row-cols-3" style="margin-left: -80px; margin-top: 20px;">
+		
+	<div class="col-sm-7" style="">
+		<h1>Tiempos</h1><br>
+		<hr style="background-color:lightblue; width: 300px; margin-left: -10px;margin-top:-20px; height: 3px;">
+		<div class="main-box no-header clearfix">
+			<div class="main-box-body clearfix">
+				<div class="table-responsive">
+					<table class="table user-list">
+						<thead>
+							<tr>    
+							<th><span>#</span></th>
+							<th><span>Item</span></th>
+							<th><span>Tiempo</span></th>
+							<th><span>Acción</span></th>	                               	      
+							</tr>
+						</thead>
+						<tbody>
+							{% for g in time %}
+						
+
+
+							<tr>
+								   
+								<td>                                      
+									<span class="user-subhead">{{g.id}}</span>
+								</td>
+								<td>{{g.item}}</td> 
+								<td>{{g.tiempo}} minutos</td> 
+
+								{% if g.item != "Vacio"%}
+
+								<td style="width: 350px; ">
+									<a href='{% url "update_tiempo" id=g.id %}' class="btn btn-success" style="margin-right: 10px;">Modificar Tiempo</a>
+									<a href='{% url "eliminar_tiempo" id=g.id %}' class="btn btn-danger">Eliminar Item</a>
+								</td>
+
+								{%endif%}
+									
+							</tr>
+																	   
+							{% endfor %}
+								
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+
+
+<div class="col col-sm-1"></div>
+
+
+
+<div class="col-sm-4">
+<h1>Crear Item</h1><br>
+<hr style="background-color:lightblue; width: 300px; margin-left: -10px;margin-top:-20px; height: 3px;">
+
+<form action="" method="POST">
+	{% csrf_token %}
+	<table>
+	<label for="item">Nombre Item:</label>
+	<input type="text_input" class="form-control" name="item"></br>
+	<label for="tiempo">Tiempo en minutos:</label>
+	<input type="number" class="form-control" name="tiempo"></br>
+	</table> </br>
+	<input type="submit" class="btn btn-info btn-block"  value="Crear Item" />
+</form>
+
+</div>
+
+
+</div>
+
+
+
+
+
+	
+
+	
+
+
+
+
+
+{%endblock%}

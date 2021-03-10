@@ -1,0 +1,205 @@
+    <!--DOCTYPE html -->
+{%  extends "base.html" %}
+
+{%  block content %}
+
+<style>
+
+.button {
+  background-color: #009688;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  }
+
+
+i {
+  color: #009688;
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+<!-- Page Container -->
+<div class="row row-cols-2" style="width:110%;margin-left: -50px; height: 95%; margin-top: 20px; ">
+
+  <!-- The Grid -->
+  <div class=" col-sm-3" style=" ">
+  
+    <!-- Left Column -->
+    <div class="col-sm-12" style="width: 100%; margin-right: 10px; height: 100%;border-radius:3px; background: white; ">
+    
+      <div class="w3-white w3-text-grey w3-card-4" style="height: 100%;">
+        <div class="w3-display-container">
+          <img src="http://hospitalelpino.cl/wphep/wp-content/uploads/2017/03/gob_hep_2011.jpg" style="width:70%" alt="Avatar">
+
+        </div>
+        <div class="w3-container">
+          <hr>
+          
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Datos Generales</b></p>
+          <p>Pacientes Totales</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="progress" style="height: 20px;">
+  <div class="progress-bar" role="progressbar" style="width: 100%;background: #009688;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{pacientes}}</div>
+</div>
+            
+          </div></br>
+          <p>Visitas Para Hoy</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:100%">
+              <div class="progress" style="height: 20px;">
+  <div class="progress-bar" role="progressbar" style="width: 100%;background: #009688;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{hoy}}</div>
+</div>
+              
+            </div>
+          </div>
+          <br>
+          <p>Cumplimiento del día</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div>
+              <div class="progress" style="height: 20px;">
+              <div class="progress-bar" id="cumplimiento" role="progressbar" style="width:;background: #009688;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">{{realizadas}}%</div>
+            </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    
+   
+    
+  <!-- End Grid -->
+  </div>
+   <div class="col-sm-9 row" style="width: 110%; ">
+
+      <div class="col-sm-6" style="border-radius:3px; background: white;padding: 10px;">
+         <canvas id="myPieChart2"  style=" width: 100%;"></canvas>
+      </div>
+      <div class="col-sm-6" style="border-radius:3px; background: white;padding:10px;">
+       
+        <canvas id="myPieChart"  style="margin: auto; width: 100%;"></canvas>
+        
+
+      </div>
+      <div class="col-sm-12" style="height: 50px;"></div>
+
+        {% for g in group %}
+                                
+        {% if g.name != 'Administrador' and g.name != 'Tutores' and g.name != 'Personal' and  g.name != 'Disponible' %}
+    
+      <div class="col-sm-5" style="margin-left: 40px; text-align: center; margin-bottom: 30px;background: white;margin-right: 30px;border-radius:3px;">
+        <h2 class=""><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Equipo {{g.name}} </h2>
+        <a href='{% url "equipo_dash" id=g.id %}' class="button"> Detalles </a></br></br>
+      </div>
+
+        {%endif%}
+        {%endfor%}
+
+    </hr>
+
+    <!-- End Right Column -->
+    </div>
+  
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top" style="background:#009688;color: white; margin-top: 10px;border-radius:3px;padding: 5px; ">
+  <p>Camino Padre Hurtado 13560, San Bernardo - Teléfono: (562) 5767300 / Anexo Minsal: 267300 - email: oirs.elpino@redsalud.gov.cl
+</a></p>
+</footer>
+
+
+<script>
+/*modificacion barra cumplimiento*/
+document.getElementById("cumplimiento").style.width={{realizadas|safe}}+"%";
+
+
+  var chrt1=document.getElementById('myPieChart').getContext('2d');
+
+  var myChart= new Chart(chrt1,{
+   "type":"pie",
+   "data":{
+     "labels":["La Pintana","El Bosque","San Bernardo"],
+     "datasets":[{"label":"My First Dataset",
+     "data":[{{LP|safe}},{{EB|safe}},{{SB|safe}}],
+     "backgroundColor":["rgb(255, 99, 132)",
+     "rgb(54, 162, 235)",
+     "rgb(255, 205, 86)"]
+    }]
+  },
+  "options":{
+    title: {
+                             display: true,
+                             fontColor:'#000',
+                             fontSize:28,
+                             text: 'Visitas por Comuna'
+                            },
+
+                            responsive:true,
+                            maintainAspectRatio: false,
+  }
+}
+
+
+
+);
+
+var chrt2=document.getElementById('myPieChart2').getContext('2d');
+
+var myChart= new Chart(chrt2,{
+ "type":"pie",
+ "data":{
+   "labels":["La Pintana","El Bosque","San Bernardo"],
+   "datasets":[{"label":"My First Dataset",
+   "data":[{{pacientes_LP|safe}},{{pacientes_EB|safe}},{{pacientes_SB|safe}}],
+   "backgroundColor":["rgb(255, 99, 132)",
+   "rgb(54, 162, 235)",
+   "rgb(255, 205, 86)"]
+  }]
+},
+"options":{
+  title: {
+                           display: true,
+                           fontColor:'#000',
+                           fontSize:28,
+                           text: 'Pacientes por Comuna'
+                          },
+
+                          responsive:true,
+                          maintainAspectRatio: false,
+}
+}
+
+
+
+);
+ 
+ 
+</script>
+
+
+
+
+{%  endblock content %}

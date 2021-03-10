@@ -1,0 +1,175 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+	
+</head>
+	<title>Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta content="telephone=no" name="format-detection">
+<body>
+
+<style type="text/css">
+	
+body{
+	margin: 0;
+	padding:0;
+	font-family:'Poppins',sans-serif;
+	font-size: 14px;
+	
+	background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0)), url({% static 'd.jpg' s%});
+	
+	color: white;
+	height: 100vh;
+			-webkit-background-size:cover;
+			background-size: cover;
+			background-position: center center;
+			position: relative;
+}
+
+.login-container{
+	height:100vh ;
+	width: 100%;
+	backdrop-filter: blur(6px);
+	
+}
+
+.login-form{
+	max-width:100%;
+	width: 370px;
+	padding: 15px;
+	margin: auto;
+	
+}
+
+.form-control{
+	font-size: 15px;
+	min-height: 48px;
+	font-weight:500; 
+}
+.form-control:focus{
+	border-color: rgb(3, 116, 110);
+	box-shadow: 0 0 0 0.2rem rgba(6, 53, 46, 0.25);
+}
+
+.btn-custom{
+	background: rgb(3, 116, 110);
+	border-color: rgb(3, 116, 110);
+	color:#fff;
+	font-weight:600;
+	min-height: 48px;
+}
+.btn-custom:focus,.btn-custom:hover,.btn-custom:active,.btn-custom:active:focus{
+	background: rgb(3, 116, 110);
+	border-color: rgb(3, 116, 110);
+	color:#fff;
+}
+.btn-custom:focus{
+	box-shadow: 0 0 0 0.2rem rgba(6, 53, 46, 0.25);
+}
+
+.form-group::before{
+	font-family: "Font Awesome\ 5 free";
+	position: relative;
+    left: -140px;
+	top:40px;
+    font-size: 24px;
+    padding-top:4px;
+
+	
+}
+
+.form-group#icon::before{
+	content:"\f007" ;
+	color:rgb(3, 116, 110);
+}
+
+.form-group#icon2::before{
+	content: "\f023" ;
+	color: rgb(3, 116, 110); 
+}
+
+.form-group input{
+   
+    border:0;
+    padding-left: 54px;
+    border-radius: 5px;
+}
+
+#eyes{
+	position: relative;
+    left: 150px;
+	margin-left: -35px;
+	top:45px;
+    font-size: 24px;
+    
+	color:rgb(3, 116, 110);
+}
+
+
+
+#eye2{
+	display: none;
+	
+}
+</style>
+
+<div class="login-container d-flex align-items-center justify-content-center">
+	<form class="login-form text-center " method="POST">
+		{% csrf_token %}
+		<h1 class="mb-5 font-weight-light text-uppercase ">Login</h1>
+		<div class="form-group" id="icon" > 
+			<input type="text" class="form-control rounded-pill form-controll-lg" name="username" id="username" placeholder="Username" autocomplete="off">
+		</div>
+		<div class="form-group " id="icon2">
+			<span id="eyes" onclick="myFunction()">
+				<i class="fa fa-eye" id="eye1" ></i>
+				<i class="fa fa-eye-slash" id="eye2"></i>
+			</span>
+			<input type="password" class="form-control rounded-pill form-controll-lg" name="password" id="password" placeholder="Password" autocomplete="off">
+			
+		</div>
+		<button type="submit" class="btn mt-5 btn-custom btn-block text_uppercase rounded-pill ">Iniciar Sesión</button>
+
+
+	</form>
+</div>
+
+
+<script>
+	
+	function myFunction(){
+		var x = document.getElementById("password");
+		var y = document.getElementById("eye1");
+		var z = document.getElementById("eye2");
+
+		if (x.type == 'password'){
+			x.type="text";
+			z.style.display="inline";
+			y.style.display="none";
+		}
+		else{
+			x.type="password";
+			y.style.display="inline";
+			z.style.display="none";
+		}
+
+
+	}
+
+
+
+
+</script>
+
+
+</body>
+</html>

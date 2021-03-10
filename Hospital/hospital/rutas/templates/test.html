@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{%  block content %}
+
+<style>
+    .aligncenter {
+        text-align: center;
+    }
+</style>    
+
+{% if rutas %}
+
+<div class="jumbotron">
+    <p class="aligncenter">
+        <h7 class="display-4">Actualmente ya hay rutas planificadas</h7>
+    </p>
+    <p class="lead">  </p>
+    <hr aling="middle" class="my-4">
+    <p class="aligncenter">
+        <img src={{mapa}}>
+    </p>
+    <p class="aligncenter">
+        <a class="btn btn-primary btn-sm" href='{% url "optimizar_rutas" %}' role="button">Replanificar rutas</a>
+    </p>
+    <p class="lead">
+    </p>
+</div>
+
+
+{%elif visitas and equipo%}
+
+<div class="jumbotron">
+    <p class="aligncenter">
+        <h7 class="display-4">Actualmente no hay rutas planificadas</h7>
+    </p>
+    <p class="lead">  </p>
+    <hr aling="middle" class="my-4">
+    <p class="aligncenter">
+        <img src={{mapa}}>
+        
+    </p>
+    <p class="aligncenter">
+        <a class="btn btn-primary btn-sm" href='{% url "optimizar_rutas" %}' role="button">Planificar rutas</a>
+    </p>
+    <p class="lead">
+    </p>
+</div>
+
+{% elif visitas %}
+
+<div class="jumbotron">
+    <p class="aligncenter">
+        <h7 class="display-4">Actualmente no hay rutas planificadas</h7>
+    </p>
+    <p class="lead">  </p>
+    <hr aling="middle" class="my-4">
+    <p class="aligncenter">
+        <img src={{mapa}}>
+        
+    </p>
+    <p class="aligncenter">
+        <div class="alert alert-danger" role="alert">
+            Las visitas no tienen un equipo medico asignado, dirigase a <a href='{%  url "agendar_lista_hoy" %}' class="alert-link">Asignación</a>. Para continuar.
+        </div>
+    </p>
+    <p class="lead">
+    </p>
+</div>
+
+{% else %}
+<div class="jumbotron">
+    <h5 class="display-4">No hay visitas para hoy</h5>
+    <p class="lead">  </p>
+    <hr class="my-4">
+    <p class="lead">
+    </p>
+</div>
+
+{%endif%}
+
+{% endblock content %}

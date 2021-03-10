@@ -1,0 +1,28 @@
+<!--DOCTYPE html -->
+{%  extends "base.html" %}
+
+<title> {%block head_title %} {{usr.first_name}} {{usr.last_name}} | {{block.super}} {%endblock head_title%} </title>
+
+
+{%block content%}
+
+<div class="card text-center">
+  <div class="card-header">
+    <h1>{{usr.first_name}} {{usr.last_name}} </h1>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ det.rut }}</h5>
+
+    <p class="card-text">Domicilio: {{ det.domicilio }}</p>
+    <p class="card-text">Comuna: {{ det.comuna }}</p>
+    <p class="card-text">Fecha de Nacimiento: {{ det.f_nacimiento}}</p>
+    
+    
+    <a href='{%  url "borrar_tutor" id=det.id %}' class="btn btn-danger" role="button" onclick="MensajeConfirmacion()">Eliminar</a>
+    <a href='{%  url "paciente_detalle" id=det.id %}' class="btn btn-success" role="button">Paciente</a>
+    <a href="{%url 'tutor_edit'  perfil=usr.id id_detalle=det.id %}" class="btn btn-info" role="button">Edit</a>
+    <a href='{%  url "listtutor" %}' class="btn btn-info" role="button">Volver</a>
+
+
+{% endblock content %}
+

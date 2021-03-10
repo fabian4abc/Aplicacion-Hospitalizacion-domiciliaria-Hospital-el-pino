@@ -1,0 +1,54 @@
+<!--DOCTYPE html -->
+{%extends "base.html"%}
+
+
+<title> {%block head_title %} Hora | {{block.super}} {%endblock head_title%} </title>	
+
+{%  block content %}
+
+<style>
+
+	input[type=text] {
+  		border: 2px solid lightblue;
+  		border-radius: 4px;
+}
+
+	input[type=date] {
+  		border: 2px solid lightblue;
+  		border-radius: 4px;
+  		height: 8%
+}  
+
+
+
+</style>
+
+
+
+<h1>Modificar Tiempo</h1>
+
+
+
+</br>
+<form method='POST' action=''>
+	{%  csrf_token %}
+
+
+<p>
+<label for="id"> Tiempo </label></br>
+<input type="number" name="tiempo"  id="tiempo" value={{t}} >
+</p>
+
+<div class="wrap-input100 rs1 validate-input">
+	</br>
+	<input type="hidden" name="item"  id="item" value="{{item}}" readonly>
+	<span class="focus-input100"></span>
+</div>
+</p>	
+
+
+<input type="submit" value="Modificar tiempo" class="btn btn-info"/>
+</form>
+
+{%  endblock content %}
+

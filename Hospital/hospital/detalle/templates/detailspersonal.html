@@ -1,0 +1,26 @@
+<!--DOCTYPE html -->
+{%  extends "base.html" %}
+
+<title> {%block head_title %} {{usr.first_name}} {{usr.last_name}} | {{block.super}} {%endblock head_title%} </title>
+
+
+{%block content%}
+
+<div class="card text-center">
+  <div class="card-header">
+    <h1>{{usr.first_name}} {{usr.last_name}} </h1>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Usuario: {{usr.username}}</h5>
+    <h5 class="card-title">{{ det.rut }}</h5>
+    <h5 class="card-title">{{ usr.email }}</h5>
+
+    <p class="card-text">{{ det.especialidad }}</p>
+        
+    <a href="{% url 'borrar_especialista' id=det.id %}" class="btn btn-danger" role="button" onclick="MensajeConfirmacion()">Eliminar</a>
+    <a href="{% url 'especialista_edit' perfil=usr.id id_personal=det.id %}" class="btn btn-info" role="button">Edit</a>
+    <a href='{% url "listenfermero" %}' class="btn btn-info" role="button">Volver</a>
+
+
+{%endblock content%}
+

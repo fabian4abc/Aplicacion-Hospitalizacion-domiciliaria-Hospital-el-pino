@@ -1,0 +1,61 @@
+<!--DOCTYPE html -->
+{%  extends "base_tutor.html" %}
+{% load static %}
+
+{%block head_title%}
+  Perfil
+{%endblock head_title%}
+{%  block content %}
+
+<div class="container" style="width: 90%; margin-top: 20px; ">
+  <div class="row">
+    <div class="card col-sm-5" style="max-width: 540px; margin-bottom: 30px; ">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src="{%static 'user.png'%}" style="width: 99%; margin-top: 20px;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h1 class="card-text">Tutor:</h1>
+            <h2 class="card-text">{{nom}} {{ape}}</h2>
+            <p class="card-text"> <span class="emph-1">Dirección
+              <span>: <br>
+                {{tutor.domicilio}} {{tutor.num_domicilio}}, {{tutor.comuna}}
+              </span><br>
+              <span class="emph-1">E-Mail</span> : <br>{{actual.email}} <br>
+              <span class="emph-1">Rut</span> : <br> {{tutor.rut}} <br>
+              <span class="emph-1">Phone</span> : <br> +56 {{tel}} 
+            </p>
+              {% if paciente.activo == 1 %}
+             <a href="{%url 'Tutor_edit'  perfil=usr.id id_detalle=tutor.id %}" class="btn btn-danger btn-lg btn-block" role="button">Editar</a>
+             {%endif%}
+             <a  href="{%url 'contra_edit' %}" class="btn btn-danger btn-lg btn-block" role="button">Cambiar contraseña</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="card col-sm-5" style="max-width: 540px; margin-bottom: 30px; ">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src="{%static 'user.png'%}" style="width: 99%; margin-top: 20px;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h1 class="card-text">Paciente:</h1>
+            <h2 class="card-text">{{paciente.nombre}} {{paciente.apellido1}} {{paciente.apellido2}}</h2>
+            <p class="card-text"> <span class="emph-1">Dirección</span>: <br>
+              {{paciente.domicilio}} {{paciente.num_domicilio}}, {{paciente.comuna}}</span><br>
+                <span class="emph-1">E-Mail</span> : <br> {{actual.email}} <br>
+                <span class="emph-1">Rut</span> : <br> {{paciente.rut}} <br>
+                <span class="emph-1">Phone</span> : <br> +56 9{{tel}} 
+              </p>
+              {% if paciente.activo == 1 %}
+             <a href="{%url 'Paciente_edit'  id_tutor=tutor.id id_paciente=paciente.id %}" class="btn btn-danger btn-block btn-lg" role="button">Editar</a>
+              {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+{%  endblock content %}

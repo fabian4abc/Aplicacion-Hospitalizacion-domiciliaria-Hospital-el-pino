@@ -1,0 +1,254 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block content%}
+
+
+<style type="text/css">
+	
+
+	form{
+		width: 430px;
+		font-family: sans-serif;
+	}
+
+	h2{
+		margin:0;
+		padding:10px 20px;
+		background: #38BDFF;
+		color:#000;
+		font-size: 18px;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+
+		
+	}
+	ul.list_box{
+		margin: 0;
+		padding: 10px 20px;
+		border:1px dashed rgba(0,0,0,.5);
+		border-top: none;
+		min-height: 300px;
+	}
+	ul.list_box li{
+		list-style: none;
+		padding: 5px 0px;
+		font-size: 16px;
+
+	}
+
+	ul.list_box li input[type="checkbox"]{
+		display: none;
+	}
+
+	ul.list_box li span.list{
+		position: relative;
+		display: inline-block;
+		overflow: hidden;
+		padding: 0 5px;
+		transform: 0.5s;
+		transition-delay: 0.5s;
+
+	}
+
+	ul.list_box li input[type="checkbox"]:checked ~ span.list{
+		color: #ccc;
+		transition: 0.2s;
+		transition-delay: 0s;
+
+
+	}
+
+	ul.list_box li span.list:before{
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		background:#38BDFF;
+		width: 100%;
+		height: 100%;
+		transition: 0.5s;
+		transition-delay: 0s;
+
+
+	}
+
+	ul.list_box li input[type="checkbox"]:checked ~ span.list:before{
+		left: 100%;
+		transition-delay: 0s;
+	}
+
+	ul.list_box li span.list:after{
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 0;
+		background:#000;
+		width: 100%;
+		height: 2px;
+		transform-origin: left;
+		transform: scaleX(0);
+		transition: 0.5s;
+		transition-delay: 0.5s;
+
+
+	}
+
+	ul.list_box li input[type="checkbox"]:checked ~ span.list:after{
+
+		transform: scaleX(1);
+		transition-delay: 0.5s;
+	}
+
+	ul.list_box li span.icon{
+		position: relative;
+		top: 0;
+		width: 18px;
+		height: 18px;
+		box-sizing: border-box;
+		border: 1px solid #262626;
+		display: inline-block;
+		margin-right: 5px;
+		overflow: hidden;
+
+	}
+	
+	ul.list_box li span.icon:before{
+		content: '✓';
+		position: absolute;
+		top: -3px;
+		left: 2px;
+		transform: translateY(-100%);
+		transition: 0.5s;
+	}	
+
+	ul.list_box li input[type="checkbox"]:checked ~ span.icon:before{
+		transform: translateY(0);
+	}	
+
+	.esp{
+		margin-left: 210px;
+		margin-top: -25px;
+	}
+
+	.ingreso{
+		margin-left: 470px;
+		margin-top: -130px;
+	}
+
+</style>
+<h1>Ingreso a equipo </h1><br>
+<a href="{% url 'listar-equipo' %} "class="btn btn-info" style="float:right;">Volver</a>
+<hr style="background-color:lightblue; width: 450px; margin-left: -10px;margin-top:-20px; height: 3px;">
+
+
+<form method="POST">
+	{% csrf_token %}
+	<div>
+		<h2>Usuarios disponibles</h2>
+		
+		<ul class="list_box">
+			{%for d in disponible %}
+			<li>
+				<label>
+
+					<input type="checkbox" name="id_usuario" value={{d.id}} >
+					<span class="icon"></span>
+					<span class="list">{{d.first_name}} {{d.last_name}}</span> </br> 
+
+					{% for e in personal %}
+
+						{%  if d.id == e.id_perfil_id %}
+
+						<div class="esp">
+							{%if e.especialidad == "ENFERMERO"%}
+	                        <span class=" badge badge-info">Enfermero</span>
+	                        {%endif%}
+	                    	{%if e.especialidad == "KINESIOLOGO" %}
+	                        <span class="badge badge-success">Kinesiologo</span>
+	                        {%endif%}
+	                    	{%if e.especialidad == "TECNICO" %}
+	                        <span class="badge badge-warning">Técnico</span>
+	                        {%endif%}  
+							{%if e.especialidad == "MEDICO" %}
+	                        <span class="badge badge-danger">Médico</span>
+	                        {%endif%}                          
+
+						</div>
+						{% endif %}
+
+					{% endfor %}
+
+
+				</label>
+			</li>
+			{%endfor%}
+		</ul>
+		
+	</div>
+	<button class="ingreso btn btn-info" type="submit">>></button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form method="POST" style="margin-left: 550px;margin-top: -351px;">
+	{% csrf_token %}
+	<div>
+		<h2>Equipo {{group.name}}</h2>
+		
+		<ul class="list_box">
+			{%for eq in equipo %}
+			<li>
+				<label>
+
+					<input type="checkbox" name="id_usuario_s" value={{eq.id}} >
+					<span class="icon"></span>
+					<span class="list">{{eq.first_name}} {{eq.last_name}}</span> </br> 
+
+					{% for e in personal %}
+
+						{%  if eq.id == e.id_perfil_id %}
+
+						<div class="esp">
+							{%if e.especialidad == "ENFERMERO"%}
+	                        <span class=" badge badge-info">Enfermero</span>
+	                        {%endif%}
+	                    	{%if e.especialidad == "KINESIOLOGO" %}
+	                        <span class="badge badge-success">Kinesiologo</span>
+	                        {%endif%}
+	                    	{%if e.especialidad == "TECNICO" %}
+	                        <span class="badge badge-warning">Técnico</span>
+	                        {%endif%}  
+							{%if e.especialidad == "MEDICO" %}
+	                        <span class="badge badge-danger">Médico</span>
+	                        {%endif%}                          
+
+						</div>
+						{% endif %}
+
+					{% endfor %}
+
+
+				</label>
+			</li>
+			{%endfor%}
+		</ul>
+		
+	</div>
+	<button class="ingreso btn btn-info" type="submit" style="margin-left: -80px; margin-top: -200px;"> << </button>
+</form>
+
+
+
+{%endblock%}

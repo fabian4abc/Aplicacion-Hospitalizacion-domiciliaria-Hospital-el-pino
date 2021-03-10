@@ -1,0 +1,34 @@
+{%extends "base_tutor.html"%}
+
+
+{%block content%}
+
+<div class="card text-center">
+  <div class="card-header">
+  	<div class="card-title">
+  		<strong>Visita n° {{form.id_visita}}</strong> 
+
+  	</div>
+  	<div class="card-body">
+  		<div class="row">
+  			<div class="col-sm-12">
+  			<strong>Personal:</strong> {{user.first_name}} {{user.last_name}}<br><br>
+  		<strong>Fecha:</strong> {{visita.fecha}}<br><br>
+  			<strong>Detalle:</strong><br>{{form.detalle}}<br><br>
+		<strong>Evolución:</strong><br>{{form.evolucion}}<br><br>
+		<strong>Pendientes:</strong><br>{{form.pendientes}}<br><br>
+		<strong>Comentarios:</strong><br>{{form.comentarios}}<br>
+
+		
+
+  		</div>
+
+ 
+
+	
+
+  	</div>
+
+    <a href="{% url 'ver_episodio_numerado_tutor' id=form.episodio id_paciente=form.id_paciente %}" class="btn btn-danger" role="button">Volver</a>
+    
+{%endblock%}
